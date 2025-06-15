@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'norm';
+    src: url(../../../assets/Roboto/Roboto-Light.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'bol';
+    src: url(../../../assets/Roboto/Roboto-Bold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'curvy';
+    src: url(../../../assets/Caveat/Caveat-Regular.ttf) format('truetype');
+  }
+
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh; 
+  height: 100%;
+    background-color: rgb(21, 50, 244);
+  overflow: hidden; 
+}
+
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: rgb(21, 50, 244);
+    background-attachment: fixed; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {  
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* hace que se vea clickeable */
+}
+
+.title {
+  font-size: 8vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.title span {
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.pyro {
+  font-family: norm;
+  
+}
+
+.control {
+  font-weight: 800;
+  font-family:bol ;
+}
+
+.center {
+   font-family: norm;
+}
+
+.subtitle {
+  font-size: 4vw; 
+  color: white;
+  line-height:25px ;
+  font-family: curvy;
+}
