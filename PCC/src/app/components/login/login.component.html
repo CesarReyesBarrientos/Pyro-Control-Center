@@ -1,0 +1,19 @@
+<body>
+  <div class="login-container">
+    <img src="../../../assets/images/icon.png" alt="User avatar" class="avatar-img" />
+    <form class="login-form"  (ngSubmit)="onSubmit()">
+      <div class="input-container">
+        <span class="icon">🔒</span>
+        <input
+        type="password"
+        placeholder="PASSWORD"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+      </div>
+      <button type="submit">LOGIN</button>
+      <a href="#" class="forgot">Forgot password?</a>
+    </form>
+  </div>
+</body>
