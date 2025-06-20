@@ -1,15 +1,29 @@
 <body>
-  <div class="container">
-    <h1>SELECT MODULE TYPE</h1>
-    
-    <div class="image-container">
-      <img src="../../../assets/images/almacen.png" alt="Almacén" class="module-img">
-      <img src="../../../assets/images/ventas.png" alt="Ventas" class="module-img selected">
-    </div>
+ <div class="container">
+  <h1>SELECT MODULE TYPE</h1>
 
-    <div class="button-container">
-      <button class="back">&#8592;</button>
-      <button class="continue">Continue</button>
-    </div>
+  <div class="image-container">
+    <img 
+      src="../../../assets/images/almacen.png" 
+      alt="Almacén"
+      [class.selected]="selectedModule === 'almacen'"
+      (click)="selectModule('almacen')"
+      class="module-img"
+    >
+    <img 
+      src="../../../assets/images/ventas.png" 
+      alt="Ventas"
+      [class.selected]="selectedModule === 'ventas'"
+      (click)="selectModule('ventas')"
+      class="module-img"
+    >
   </div>
+
+  <div class="button-container">
+    <button class="back" (click)="goBack()">&#8592;</button>
+    <button class="continue" [disabled]="!selectedModule" (click)="continue()">Continue</button>
+  </div>
+</div> 
 </body>
+
+
