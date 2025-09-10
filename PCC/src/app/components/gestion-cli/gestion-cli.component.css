@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'norm';
+  src: url(../../../assets/Roboto/Roboto-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'bol';
+  src: url(../../../assets/Roboto/Roboto-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'curvy';
+  src: url(../../../assets/Caveat/Caveat-Regular.ttf) format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(21, 50, 244);
+  overflow: hidden;
+  font-family: 'norm', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: flex-start; /* alinear arriba */
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20px; /* espacio superior */
+}
+
+.container {
+    margin-bottom: 40px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 3vw; /* más pequeño */
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.title span {
+  line-height: 1;
+}
+
+.pyro {
+  font-family: norm;
+}
+
+.control {
+  font-weight: 800;
+  font-family: bol;
+  color: white;
+}
+
+.center {
+  font-family: norm;
+}
+
+.subtitle {
+  font-size: 2vw; /* más pequeño */
+  color: white;
+  line-height: 1.20;
+  font-family: curvy;
+  margin-top: 4px;
+}
