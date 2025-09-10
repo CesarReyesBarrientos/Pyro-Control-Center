@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-
 @Component({
-  selector: 'app-modo',
+  selector: 'app-modo-almacen',
   standalone: true,
   imports: [],
-  templateUrl: './modo.component.html',
-  styleUrl: './modo.component.css'
+  templateUrl: './modo-almacen.component.html',
+  styleUrl: './modo-almacen.component.css'
 })
-export class ModoComponent {
+export class ModoAlmacenComponent {
  selectedModule: string | null = null;
 
   constructor(private router: Router) {}
@@ -19,9 +17,9 @@ export class ModoComponent {
 
     // Navegación inmediata según la imagen seleccionada
     if (module === 'almacen') {
-      this.router.navigate(['/ventas/productos']); // OrdenesCliComponent
+      this.router.navigate(['/inventario']); 
     } else if (module === 'ventas') {
-      this.router.navigate(['/almacen']); // ProductComponent
+      this.router.navigate(['nuevoprod']);
     }
   }
 
@@ -34,6 +32,8 @@ export class ModoComponent {
   }
 
   goBack(): void {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('modo');
   }
+
+  
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuevo Producto</title>
+</head>
+<body>
+  <div class="form-card">
+    <h2>Nuevo Producto</h2>
+    <form id="formProducto">
+
+      <fieldset>
+        <legend>Datos generales</legend>
+        <div class="grid">
+          <div class="form-field">
+            <label for="sku">SKU *</label>
+            <input type="text" id="sku" name="sku" required />
+          </div>
+
+          <div class="form-field">
+            <label for="nombre">Nombre del material *</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+
+          <div class="grid-full form-field">
+            <label for="categoria">Categoría *</label>
+            <select id="categoria" name="categoria" required>
+              <option value="">Selecciona...</option>
+              <option>Wire</option><option>Cable</option><option>Shruds</option>
+              <option>Head</option><option>Tail</option><option>Box</option>
+              <option>Polvora</option><option>Quimicos</option><option>Papel</option>
+              <option>Carton</option><option>Otros</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Inventario</legend>
+        <div class="grid">
+          <div class="form-field">
+            <label for="stock_actual">Stock actual *</label>
+            <input type="number" id="stock_actual" name="stock_actual" step="0.001" required />
+          </div>
+
+          <div class="form-field">
+            <label for="stock_minimo">Stock mínimo *</label>
+            <input type="number" id="stock_minimo" name="stock_minimo" step="0.001" required />
+          </div>
+
+          <div class="form-field">
+            <label for="unidad">Unidad de medida *</label>
+            <select id="unidad" name="unidad" required>
+              <option value="">Selecciona...</option>
+              <option>PZ</option><option>FT</option><option>LB</option>
+              <option>KG</option><option>M</option><option>CM</option>
+              <option>ROLLO</option><option>CAJA</option><option>PAQUETE</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="precio">Precio unitario *</label>
+            <input type="number" id="precio" name="precio" step="0.01" required />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Almacén</legend>
+        <div class="grid">
+          <div class="form-field">
+            <label for="proveedor">Proveedor</label>
+            <input type="text" id="proveedor" name="proveedor" />
+          </div>
+
+          <div class="form-field">
+            <label for="ubicacion">Ubicación en almacén</label>
+            <input type="text" id="ubicacion" name="ubicacion" />
+          </div>
+
+          <div class="grid-full form-field">
+            <label for="notas">Notas adicionales</label>
+            <textarea id="notas" name="notas" rows="3"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button type="submit" class="primary">Guardar Producto</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("formProducto").addEventListener("submit", function(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this).entries());
+      alert("Producto listo para guardar en BD:\n" + JSON.stringify(data, null, 2));
+    });
+  </script>
+</body>
+</html>

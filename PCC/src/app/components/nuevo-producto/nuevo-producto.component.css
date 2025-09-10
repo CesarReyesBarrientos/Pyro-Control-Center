@@ -1,0 +1,106 @@
+    /* Box sizing consistente */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #e9ecf7);
+      padding: 40px;
+      margin: 0;
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      border-top: 8px solid #2563eb;
+      animation: fadeIn 0.6s ease;
+    }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(10px)} to {opacity:1; transform:translateY(0)} }
+
+    h2 {
+      margin: 0 0 22px 0;
+      color: #2563eb;
+      text-align: center;
+      font-size: 26px;
+    }
+
+    fieldset {
+      border: none;
+      margin: 0 0 26px 0;
+      padding: 0;
+    }
+    legend {
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    /* GRID: gap = row-gap column-gap (28px vertical, 24px horizontal) */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 24px; /* row-gap (vertical) / column-gap (horizontal) */
+      align-items: start;
+    }
+    /* Si queremos que un elemento ocupe todo el ancho */
+    .grid-full { grid-column: 1 / -1; }
+
+    /* Cada celda se apila verticalmente: label arriba, input abajo */
+    .form-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+      margin-bottom: 10px; /* separación label -> input */
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fbfdff;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 6px rgba(37,99,235,0.14);
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 72px; }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    button {
+      border: none;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .primary { background: #2563eb; }
+    .primary:hover { background: #1e40af; transform: translateY(-1px); }
+    .secondary { background: #6b7280; }
+    .secondary:hover { background: #4b5563; transform: translateY(-1px); }
+
+    /* Responsive: pasa a 1 columna en pantallas pequeñas */
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; gap: 18px; }
+      .grid-full { grid-column: auto; }
+    }
