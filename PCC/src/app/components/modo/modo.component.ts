@@ -1,39 +1,21 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { RoleService } from '../../services/role';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-modo',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './modo.component.html',
-  styleUrl: './modo.component.css'
+  styleUrls: ['./modo.component.css']
 })
+
+
 export class ModoComponent {
- selectedModule: string | null = null;
+  // Expón los observables de roles a tu plantilla
+  public isAdmin$ = this.roleService.isAdmin();
+  public isProduccion$ = this.roleService.isProduccion();
 
-  constructor(private router: Router) {}
-
-   selectModule(module: string) {
-    this.selectedModule = module;
-
-    // Navegación inmediata según la imagen seleccionada
-    if (module === 'almacen') {
-      this.router.navigate(['/ventas/productos']); // OrdenesCliComponent
-    } else if (module === 'ventas') {
-      this.router.navigate(['/almacen']); // ProductComponent
-    }
-  }
-
-  continue(): void {
-    if (this.selectedModule === 'ventas') {
-      this.router.navigateByUrl('/gestion-cli');
-    } else if (this.selectedModule === 'almacen') {
-      this.router.navigateByUrl('/modo-almacen');
-    }
-  }
-
-  goBack(): void {
-    this.router.navigateByUrl('/');
-  }
+  constructor(private roleService: RoleService) {}
 }

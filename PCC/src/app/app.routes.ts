@@ -1,8 +1,11 @@
-import { RouterModule, Routes } from '@angular/router';
+// src/app/app.routes.ts
+
+import { Routes } from '@angular/router';
+
+// --- Componentes ---
 import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { ModoComponent } from './components/modo/modo.component';
-import { NgModule } from '@angular/core';
 import { GestionCliComponent } from './components/gestion-cli/gestion-cli.component';
 import { GestionInvComponent } from './components/gestion-inv/gestion-inv.component';
 import { ProductComponent } from './components/product/product.component';
@@ -10,21 +13,53 @@ import { OrdenesCliComponent } from './components/ordenes-cli/ordenes-cli.compon
 import { ModoAlmacenComponent } from './modo-almacen/modo-almacen.component';
 import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-producto.component';
 
+// --- Guards ---
+import { AuthGuard } from '@auth0/auth0-angular';
+import { adminGuard } from './security/admin-guard';
+import { almacenGuard } from './security/almacen-guard';
+import { ventasGuard } from './security/produccion-guard'; 
+
 export const routes: Routes = [
-    {path : '', component: InicioComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'modo', component: ModoComponent},
-    { path: 'gestion-cli', component: GestionCliComponent },
-    { path: 'gestion-inv', component: GestionInvComponent },
-    { path: 'almacen', component: ModoAlmacenComponent },
-    { path: 'inventario', component: ProductComponent },
-    { path: 'nuevoprod', component: NuevoProductoComponent }
+  // --- Rutas Públicas ---
+  { path: '', component: InicioComponent },
+  { path: 'login', component: LoginComponent },
+
+  // --- Rutas Protegidas ---
+  { 
+    path: 'modo', 
+    component: ModoComponent,
+    canActivate: [AuthGuard, adminGuard] // Protegido por Ventas o Admin
+  },
+  { 
+    path: 'gestion-cli', 
+    component: GestionCliComponent,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
+  },
+  { 
+    path: 'inventario', 
+    component: ProductComponent,
+    canActivate: [AuthGuard, almacenGuard] // Protegido por Almacén o Admin
+  },
+  {
+    path: 'gestion-inv', 
+    component: GestionInvComponent,
+    canActivate: [AuthGuard, adminGuard] // Protegido por Admin
+  },
+  {
+    path: 'modo-almacen', 
+    component: ModoAlmacenComponent,
+    canActivate: [AuthGuard, almacenGuard] // Protegido por Almacén o Admin
+  },
+  { 
+    path: 'nuevoprod', 
+    component: NuevoProductoComponent,
+    canActivate: [AuthGuard, almacenGuard] // Protegido por Almacén o Admin
+  },
+  {
+    path: 'ordenes-cli',
+    component: OrdenesCliComponent,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
+  }
+
+  // { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
-
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports:[RouterModule]
-    
-})
-export class AppRoutingModule {}

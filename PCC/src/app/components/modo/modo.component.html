@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
  <div class="container">
   <h1>SELECT MODULE TYPE</h1>
 
@@ -26,4 +26,56 @@
 </div> 
 </body>
 
+ -->
 
+
+ <body>
+  <div class="container">
+    <h1>SELECT MODULE TYPE</h1>
+
+    <div class="image-container">
+      <!-- Gestión de Clientes -->
+      <a
+        *ngIf="(isAdmin$ | async) || (isProduccion$ | async)"
+        [routerLink]="'/gestion-cli'"
+        class="module-link"
+      >
+        <img
+          src="../../../assets/images/almacen.png"
+          alt="Gestión de Clientes"
+          class="module-img"
+        >
+      </a>
+
+      <!-- Gestión de Ventas -->
+      <a
+        *ngIf="isAdmin$ | async"
+        [routerLink]="'/ordenes-cli'"
+        class="module-link"
+      >
+        <img
+          src="../../../assets/images/ventas.png"
+          alt="Gestión de Ventas"
+          class="module-img"
+        >
+      </a>
+
+      <!-- Modo Almacén -->
+      <a
+        *ngIf="isAdmin$ | async"
+        [routerLink]="'/modo-almacen'"
+        class="module-link"
+      >
+        <img
+          src="../../../assets/images/almacen.png"
+          alt="Modo Almacén"
+          class="module-img"
+        >
+      </a>
+    </div>
+
+    <!-- <div class="button-container">
+      <button class="back" (click)="goBack()">&#8592;</button>
+    </div> -->
+  </div>
+</body>
