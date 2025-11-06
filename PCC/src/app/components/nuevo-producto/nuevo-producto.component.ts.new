@@ -1,0 +1,171 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from '../../services/app.service';
+import { firstValueFrom } from 'rxjs';
+
+interface Proveedor {
+  id: number;
+  nombre: string;
+  telefono: string;
+  email: string;
+  direccion: string;
+  rfc: string;
+}
+
+@Component({
+  selector: 'app-nuevo-producto',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './nuevo-producto.component.html',
+  styleUrl: './nuevo-producto.component.css'
+})
+export class NuevoProductoComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private api = inject(ApiService);
+
+  proveedores: Proveedor[] = [];
+  mostrarFormProveedor = false;
+  stockInputType = 'number';
+  stockStep = '0.001';
+
+  form = this.fb.group({
+    sku: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    nombre: ['', Validators.required],
+    categoria: ['', Validators.required],
+    stock_actual: [0, [Validators.required, Validators.min(0)]],
+    stock_minimo: [0, [Validators.required, Validators.min(0)]],
+    unidad: ['', Validators.required],
+    precio: [0, [Validators.required, Validators.min(0)]],
+    proveedor: ['', Validators.required],
+    notas: [''],
+    // Campos para nuevo proveedor
+    nombre_proveedor: [''],
+    telefono: [''],
+    email: ['', Validators.email],
+    direccion: [''],
+    rfc: ['']
+  });
+
+  ngOnInit(): void {
+    this.cargarProveedores();
+  }
+
+  cargarProveedores() {
+    this.api.getProveedores().subscribe({
+      next: (data) => {
+        this.proveedores = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar proveedores:', error);
+      }
+    });
+  }
+
+  onUnidadChange(event: Event) {
+    const unidad = (event.target as HTMLSelectElement).value;
+    if (['CAJA', 'PZ', 'PAQUETE'].includes(unidad)) {
+      this.stockInputType = 'number';
+      this.stockStep = '1';
+      // Redondear valores actuales si existen
+      const stockActual = this.form.get('stock_actual')?.value;
+      const stockMinimo = this.form.get('stock_minimo')?.value;
+      if (stockActual) {
+        this.form.patchValue({ stock_actual: Math.round(stockActual) });
+      }
+      if (stockMinimo) {
+        this.form.patchValue({ stock_minimo: Math.round(stockMinimo) });
+      }
+    } else {
+      this.stockInputType = 'number';
+      this.stockStep = '0.001';
+    }
+  }
+
+  onProveedorChange(event: Event) {
+    const valor = (event.target as HTMLSelectElement).value;
+    this.mostrarFormProveedor = valor === 'nuevo';
+    if (this.mostrarFormProveedor) {
+      this.form.get('nombre_proveedor')?.setValidators([Validators.required]);
+      this.form.get('telefono')?.setValidators([Validators.required]);
+      this.form.get('email')?.setValidators([Validators.required, Validators.email]);
+      this.form.get('direccion')?.setValidators([Validators.required]);
+      this.form.get('rfc')?.setValidators([Validators.required]);
+    } else {
+      this.form.get('nombre_proveedor')?.clearValidators();
+      this.form.get('telefono')?.clearValidators();
+      this.form.get('email')?.clearValidators();
+      this.form.get('direccion')?.clearValidators();
+      this.form.get('rfc')?.clearValidators();
+    }
+    // Actualizar el estado de validación
+    ['nombre_proveedor', 'telefono', 'email', 'direccion', 'rfc'].forEach(campo => {
+      this.form.get(campo)?.updateValueAndValidity();
+    });
+  }
+
+  async guardar() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    try {
+      let proveedorId = this.form.value.proveedor;
+
+      // Si es un nuevo proveedor, primero lo guardamos
+      if (this.mostrarFormProveedor) {
+        const nuevoProveedor = {
+          nombre: this.form.value.nombre_proveedor!,
+          telefono: this.form.value.telefono!,
+          email: this.form.value.email!,
+          direccion: this.form.value.direccion!,
+          rfc: this.form.value.rfc!
+        };
+        
+        const response = await firstValueFrom(this.api.createProveedor(nuevoProveedor));
+        proveedorId = String(response.id);
+      }
+
+      // Luego guardamos el producto
+      const payload = {
+        sku: Number(this.form.value.sku),
+        nombre: this.form.value.nombre!,
+        categoria: this.form.value.categoria!,
+        stock_actual: Number(this.form.value.stock_actual),
+        stock_minimo: Number(this.form.value.stock_minimo),
+        unidad_de_medida: this.form.value.unidad!,
+        precio: Number(this.form.value.precio),
+        proveedor_id: Number(proveedorId),
+        notas: this.form.value.notas || ''
+      };
+
+      await firstValueFrom(this.api.createInventory(payload));
+      alert('Producto guardado exitosamente');
+      this.limpiarFormulario();
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      alert('Error al guardar el producto o proveedor.');
+    }
+  }
+
+  limpiarFormulario() {
+    this.form.reset({
+      sku: '',
+      nombre: '',
+      categoria: '',
+      stock_actual: 0,
+      stock_minimo: 0,
+      unidad: '',
+      precio: 0,
+      proveedor: '',
+      notas: '',
+      nombre_proveedor: '',
+      telefono: '',
+      email: '',
+      direccion: '',
+      rfc: ''
+    });
+    this.mostrarFormProveedor = false;
+  }
+}

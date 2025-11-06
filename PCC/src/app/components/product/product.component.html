@@ -17,24 +17,19 @@
           <th>Stock</th>
           <th>Unidad</th>
           <th>Precio Unitario</th>
+          <th>Proveedor</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>PROD-001</td><td>Pólvora Negra</td><td>Explosivo</td><td>120</td><td>kg</td><td>$250</td></tr>
-        <tr><td>PROD-002</td><td>Mecha Lenta</td><td>Accesorio</td><td>500</td><td>m</td><td>$15</td></tr>
-        <tr><td>PROD-003</td><td>Carcasa 3"</td><td>Contenedor</td><td>80</td><td>pza</td><td>$40</td></tr>
-        <tr><td>PROD-004</td><td>Colorante Rojo</td><td>Químico</td><td>60</td><td>kg</td><td>$300</td></tr>
-        <tr><td>PROD-005</td><td>Cartón Reforzado</td><td>Material</td><td>200</td><td>pza</td><td>$12</td></tr>
-        <tr><td>PROD-006</td><td>Aluminio en Polvo</td><td>Químico</td><td>90</td><td>kg</td><td>$450</td></tr>
-        <tr><td>PROD-007</td><td>Mecha Rápida</td><td>Accesorio</td><td>320</td><td>m</td><td>$20</td></tr>
-        <tr><td>PROD-008</td><td>Carcasa 5"</td><td>Contenedor</td><td>50</td><td>pza</td><td>$55</td></tr>
-        <tr><td>PROD-009</td><td>Colorante Azul</td><td>Químico</td><td>40</td><td>kg</td><td>$280</td></tr>
-        <tr><td>PROD-010</td><td>Tubo de Cartón</td><td>Material</td><td>600</td><td>pza</td><td>$8</td></tr>
-        <tr><td>PROD-011</td><td>Granalla Metálica</td><td>Explosivo</td><td>30</td><td>kg</td><td>$500</td></tr>
-        <tr><td>PROD-012</td><td>Parche de Seguridad</td><td>Accesorio</td><td>250</td><td>pza</td><td>$5</td></tr>
-        <tr><td>PROD-013</td><td>Papel Kraft</td><td>Material</td><td>700</td><td>m</td><td>$3</td></tr>
-        <tr><td>PROD-014</td><td>Colorante Verde</td><td>Químico</td><td>70</td><td>kg</td><td>$295</td></tr>
-        <tr><td>PROD-015</td><td>Carcasa 8"</td><td>Contenedor</td><td>25</td><td>pza</td><td>$95</td></tr>
+        <tr *ngFor="let i of items()">
+          <td>{{ sku(i.id) }}</td>
+          <td>{{ i.nombre || i.producto }}</td>
+          <td>{{ i.categoria }}</td>
+          <td>{{ i.stock_actual || i.stock }}</td>
+          <td>{{ i.unidad_de_medida }}</td>
+          <td>{{ i.precio | currency:'MXN':'symbol':'1.0-2' }}</td>
+          <td>{{ i.proveedor_nombre }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
