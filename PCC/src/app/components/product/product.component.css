@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
-  min-height: 100vh;
+  min-height: 98vh;
   display: flex;
   flex-direction: column;
   gap: 30px;

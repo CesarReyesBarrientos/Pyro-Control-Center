@@ -28,7 +28,7 @@ export const routes: Routes = [
   { 
     path: 'modo', 
     component: ModoComponent,
-    canActivate: [AuthGuard, adminGuard] // Protegido por Ventas o Admin
+    canActivate: [AuthGuard] // Todos pueden entrar
   },
   { 
     path: 'gestion-cli', 
@@ -59,7 +59,7 @@ export const routes: Routes = [
     path: 'ordenes-cli',
     component: OrdenesCliComponent,
     canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
-  }
+  },
 
-  // { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

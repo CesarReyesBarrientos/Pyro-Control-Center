@@ -17,8 +17,8 @@ export const appConfig: ApplicationConfig = {
       
       authorizationParams: {
         redirect_uri: window.location.origin, // Más robusto que hardcodear
-        audience: 'https://dev-1kquk0aiaxxh1wly.us.auth0.com/api/v2/',
-        scope: 'openid profile email'
+        // audience: 'https://dev-1kquk0aiaxxh1wly.us.auth0.com/api/v2/',
+        // scope: 'openid profile email'
       },
       
       // Configuración de caché

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
 import { RoleService } from '../../services/role';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-modo',
@@ -10,12 +12,23 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './modo.component.html',
   styleUrls: ['./modo.component.css']
 })
-
-
 export class ModoComponent {
-  // Expón los observables de roles a tu plantilla
+  
   public isAdmin$ = this.roleService.isAdmin();
-  public isProduccion$ = this.roleService.isProduccion();
+  public isAlmacenista$ = this.roleService.isAlmacenista();
+  public isGerenteProduccion$ = this.roleService.isProduccion(); 
 
-  constructor(private roleService: RoleService) {}
+  constructor(
+    private roleService: RoleService,
+    public auth: AuthService,
+    @Inject(DOCUMENT) private doc: Document
+  ) {}
+
+  logout(): void {
+    this.auth.logout({ 
+      logoutParams: { 
+        returnTo: this.doc.location.origin 
+      } 
+    });
+  }
 }

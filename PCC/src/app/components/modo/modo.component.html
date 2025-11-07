@@ -1,42 +1,12 @@
-<!-- <body>
- <div class="container">
-  <h1>SELECT MODULE TYPE</h1>
+<body>
+  <button class="logout-button-fixed" (click)="logout()">Cerrar Sesión</button>
 
-  <div class="image-container">
-    <img 
-      src="../../../assets/images/almacen.png" 
-      alt="Almacén"
-      [class.selected]="selectedModule === 'ventas'"
-      (click)="selectModule('ventas')"
-      class="module-img"
-    >
-    <img 
-      src="../../../assets/images/ventas.png" 
-      alt="Ventas"
-      [class.selected]="selectedModule === '/almacen'"
-      (click)="selectModule('almacen')"
-      class="module-img"
-    >
-  </div>
-
-  <div class="button-container">
-    <button class="back" (click)="goBack()">&#8592;</button>
-    <button class="continue" [disabled]="!selectedModule" (click)="continue()">Continue</button>
-  </div>
-</div> 
-</body>
-
- -->
-
-
- <body>
   <div class="container">
     <h1>SELECT MODULE TYPE</h1>
-
     <div class="image-container">
-      <!-- Gestión de Clientes -->
+      <!-- Clientes -->
       <a
-        *ngIf="(isAdmin$ | async) || (isProduccion$ | async)"
+        *ngIf="(isAdmin$ | async) || (isGerenteProduccion$ | async)"
         [routerLink]="'/gestion-cli'"
         class="module-link"
       >
@@ -46,10 +16,9 @@
           class="module-img"
         >
       </a>
-
-      <!-- Gestión de Ventas -->
+      <!-- Ventas -->
       <a
-        *ngIf="isAdmin$ | async"
+        *ngIf="(isAdmin$ | async) || (isGerenteProduccion$ | async)"
         [routerLink]="'/ordenes-cli'"
         class="module-link"
       >
@@ -59,10 +28,9 @@
           class="module-img"
         >
       </a>
-
-      <!-- Modo Almacén -->
+      <!-- Almacén -->
       <a
-        *ngIf="isAdmin$ | async"
+        *ngIf="(isAdmin$ | async) || (isAlmacenista$ | async)"
         [routerLink]="'/modo-almacen'"
         class="module-link"
       >
@@ -73,9 +41,5 @@
         >
       </a>
     </div>
-
-    <!-- <div class="button-container">
-      <button class="back" (click)="goBack()">&#8592;</button>
-    </div> -->
-  </div>
+    </div>
 </body>

@@ -6,16 +6,16 @@
 }
 
 body {
-    padding-top: 4rem;
   background-color: #fff;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 98vh;
 }
 
 .container {
-  text-align: center;
+  padding: 2rem;
 }
 
 h1 {
@@ -75,4 +75,26 @@ h1 {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+
+.logout-button-fixed {
+  position: fixed; 
+  top: 2rem;       
+  right: 2rem;     
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.logout-button-fixed:hover {
+  background-color: #c0392b;
+  opacity: 0.9;
 }

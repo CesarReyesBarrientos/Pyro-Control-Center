@@ -108,16 +108,10 @@ export class AppComponent {
         // Redirige según el rol
         let targetRoute = '/';
         
-        if (roles.includes('Admin')) {
-          console.log('✅ Usuario es Admin');
+        if (roles.includes('Admin') || roles.includes('Almacenista') || roles.includes('Gerente de producción')) {
+          console.log('✅ Usuario es ', roles[0]);
           targetRoute = '/modo';
-        } else if (roles.includes('Almacenista')) {
-          console.log('✅ Usuario es Almacenista');
-          targetRoute = '/almacen';
-        } else if (roles.includes('Gerente de producción')) {
-          console.log('✅ Usuario es Gerente de producción');
-          targetRoute = '/modo';
-        } else {
+        }  else {
           console.warn('⚠️ Rol no reconocido:', roles[0]);
           targetRoute = '/';
         }

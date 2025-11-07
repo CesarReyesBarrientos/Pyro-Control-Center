@@ -18,8 +18,7 @@
 }
 
 html, body {
-  width: 100vw;
-  height: 100vh;
+  height: 98vh;
   background-color: rgb(21, 50, 244);
   overflow: hidden;
   font-family: 'norm', sans-serif;
