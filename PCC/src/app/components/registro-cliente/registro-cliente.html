@@ -1,0 +1,55 @@
+
+<title>Registrar Nuevo Cliente</title>
+<body>
+  <div class="form-card">
+    <h2>Nuevo Cliente</h2>
+    <form id="formCliente">
+      
+      <label for="CustomerName">Nombre completo *</label>
+      <input type="text" id="CustomerName" name="CustomerName" required>
+
+      <label for="email">Correo electrónico *</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="telefono">Teléfono *</label>
+      <input type="text" id="telefono" name="telefono" required>
+
+      <label for="codigo_pais">Código de país</label>
+      <select id="codigo_pais" name="codigo_pais">
+        <option value="">Selecciona...</option>
+        <option value="MX">🇲🇽 México (MX)</option>
+        <option value="US">🇺🇸 Estados Unidos (US)</option>
+        <option value="ES">🇪🇸 España (ES)</option>
+        <option value="AR">🇦🇷 Argentina (AR)</option>
+        <option value="CO">🇨🇴 Colombia (CO)</option>
+        <option value="CL">🇨🇱 Chile (CL)</option>
+      </select>
+
+      <label for="direccion">Dirección</label>
+      <textarea id="direccion" name="direccion" rows="2"></textarea>
+
+      <label for="ciudad">Ciudad</label>
+      <input type="text" id="ciudad" name="ciudad">
+
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" name="estado">
+
+      <label for="codigo_postal">Código Postal</label>
+      <input type="text" id="codigo_postal" name="codigo_postal">
+
+      <label style="margin-top:15px; display:flex; align-items:center; gap:10px;">
+        <input type="checkbox" id="activo" name="activo" checked>
+        Cliente activo
+      </label>
+
+      <div class="actions">
+        <button type="reset" class="secondary">Limpiar</button>
+        <button type="submit" class="primary">Guardar Cliente</button>
+      </div>
+    </form>
+  </div>
+
+ 
+</body>
+
+
