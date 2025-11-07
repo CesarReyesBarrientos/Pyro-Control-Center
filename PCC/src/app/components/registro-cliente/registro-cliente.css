@@ -1,0 +1,90 @@
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #091b41, #0f1b3d); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 30px; }
+
+    /* ===== CARD ===== */
+    .form-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      animation: fadeInUp .8s ease;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    /* ===== FORM ===== */
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      outline: none;
+      transition: all .25s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      box-shadow: 0 0 0 3px rgba(21, 42, 88, 0.6);
+      transform: scale(1.02);
+    }
+
+    textarea { resize: vertical; }
+
+    /* ===== ACTIONS ===== */
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+
+    button:hover { transform: translateY(-2px); }
+
+    button.secondary {
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    button.primary {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.4);
+    }
+
+    button.primary:hover { background: #1d4ed8; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }

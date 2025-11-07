@@ -2,16 +2,17 @@
   <button class="logout-button-fixed" (click)="logout()">Cerrar Sesión</button>
 
   <div class="container">
-    <h1>SELECT MODULE TYPE</h1>
+    <h1 style="text-align: center;">SELECT MODULE TYPE</h1>
     <div class="image-container">
       <!-- Clientes -->
       <a
         *ngIf="(isAdmin$ | async) || (isGerenteProduccion$ | async)"
-        [routerLink]="'/gestion-cli'"
+        [routerLink]="'/registro-cliente'"
         class="module-link"
       >
         <img
-          src="../../../assets/images/almacen.png"
+          style="height: 322px; width: 300px;"
+          src="../../../assets/images/clientes.png"
           alt="Gestión de Clientes"
           class="module-img"
         >
@@ -23,6 +24,7 @@
         class="module-link"
       >
         <img
+         style="height: 320px;"
           src="../../../assets/images/ventas.png"
           alt="Gestión de Ventas"
           class="module-img"
@@ -35,6 +37,7 @@
         class="module-link"
       >
         <img
+        style="height: 335px;"
           src="../../../assets/images/almacen.png"
           alt="Modo Almacén"
           class="module-img"

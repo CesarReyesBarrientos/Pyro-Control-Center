@@ -12,6 +12,7 @@ import { ProductComponent } from './components/product/product.component';
 import { OrdenesCliComponent } from './components/ordenes-cli/ordenes-cli.component';
 import { ModoAlmacenComponent } from './modo-almacen/modo-almacen.component';
 import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-producto.component';
+import { RegistroCliente } from './components/registro-cliente/registro-cliente';
 
 // --- Guards ---
 import { AuthGuard } from '@auth0/auth0-angular';
@@ -58,6 +59,11 @@ export const routes: Routes = [
   {
     path: 'ordenes-cli',
     component: OrdenesCliComponent,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
+  },
+  {
+    path: 'registro-cliente',
+    component: RegistroCliente,
     canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
   },
 
