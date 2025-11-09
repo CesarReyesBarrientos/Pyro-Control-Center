@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of items()">
+  <tr *ngFor="let i of items()" [class.low-stock]="isLowStock(i)">
           <td>{{ sku(i.id) }}</td>
           <td>{{ i.nombre || i.producto }}</td>
           <td>{{ i.categoria }}</td>

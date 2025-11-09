@@ -66,6 +66,18 @@ h2 {
   transition: 0.25s;
 }
 
+/* Low stock highlight */
+.styled-table tbody tr.low-stock {
+  background: linear-gradient(90deg, rgba(255,235,238,0.95), rgba(255,205,210,0.95));
+  /* Keep text color and weight the same as other rows for consistency */
+  color: inherit;
+  font-weight: inherit;
+}
+
+.styled-table tbody tr.low-stock td {
+  border-color: #fca5a5;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
