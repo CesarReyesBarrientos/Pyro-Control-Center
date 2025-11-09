@@ -7,7 +7,7 @@
       <!-- Clientes -->
       <a
         *ngIf="(isAdmin$ | async) || (isGerenteProduccion$ | async)"
-        [routerLink]="'/registro-cliente'"
+        [routerLink]="'/modo-clientes'"
         class="module-link"
       >
         <img
@@ -20,7 +20,7 @@
       <!-- Ventas -->
       <a
         *ngIf="(isAdmin$ | async) || (isGerenteProduccion$ | async)"
-        [routerLink]="'/ordenes-cli'"
+        [routerLink]="'/modo-ventas'"
         class="module-link"
       >
         <img
