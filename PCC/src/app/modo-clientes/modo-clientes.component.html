@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>SELECT MODULE TYPE</h1>
+
+  <div class="image-container">
+    <img 
+      src="../../../assets/images/agregar_cliente.png" 
+      alt="Registro de Clientes"
+      [class.selected]="selectedModule === 'registro'"
+      (click)="selectModule('registro')"
+      class="module-img"
+    >
+    <img 
+      src="../../../assets/images/ver_cliente.png" 
+      alt="Gestión de Clientes"
+      [class.selected]="selectedModule === 'gestion'"
+      (click)="selectModule('gestion')"
+      class="module-img"
+    >
+  </div>
+
+  <div class="button-container">
+    <button class="back" (click)="goBack()">&#8592;</button>
+  </div>
+</div>
