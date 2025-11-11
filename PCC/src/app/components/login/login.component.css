@@ -8,22 +8,27 @@
 body {
   height: 98vh;
   background-image: url('../../../assets/images/loginwallpapers.png');
+  background-size: cover;          /* Para que la imagen de fondo se ajuste */
+  background-position: center;     /* Centra la imagen */
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Contenedor principal */
 .login-container {
   text-align: center;
-  background: transparent;
-  padding: 20px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05); /* leve transparencia */
+  backdrop-filter: blur(4px);            /* sutil efecto vidrio */
+  padding: 30px;
+  border-radius: 12px;
   width: 100%;
   max-width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-
-
+/* Imagen de usuario */
 .avatar-img {
   width: 200px;
   height: 200px;
@@ -33,12 +38,14 @@ body {
   display: block;
 }
 
+/* Formulario */
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Contenedor de inputs */
 .input-container {
   display: flex;
   align-items: center;
@@ -62,6 +69,7 @@ input[type="password"] {
   font-size: 14px;
 }
 
+/* Botón de login */
 button {
   background-color: white;
   border: none;
@@ -77,9 +85,86 @@ button:hover {
   background-color: #e6e6e6;
 }
 
+/* Enlace */
 .forgot {
   font-size: 0.9em;
   color: white;
   text-decoration: none;
   margin-top: 10px;
+}
+
+/* =============================== */
+/* 📱 Diseño Responsive */
+/* =============================== */
+
+/* Tablets medianas (≤ 992px) */
+@media (max-width: 992px) {
+  .login-container {
+    max-width: 320px;
+    padding: 25px;
+  }
+
+  .avatar-img {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 25px;
+  }
+
+  button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablets pequeñas y celulares grandes (≤ 768px) */
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  .login-container {
+    max-width: 300px;
+    padding: 20px;
+  }
+
+  .avatar-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  button {
+    padding: 9px;
+  }
+}
+
+/* Celulares pequeños (≤ 480px) */
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .login-container {
+    max-width: 260px;
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .avatar-img {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 20px;
+  }
+
+  .login-form p {
+    font-size: 0.9em;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .forgot {
+    font-size: 0.8em;
+  }
 }
