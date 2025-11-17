@@ -1,42 +1,37 @@
-<!DOCTYPE html>
-<html lang="es-MX">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Órdenes por Cliente</title>
-</head>
-<body>
-  <div class="form-card">
-    <h2>Órdenes por Cliente</h2>
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th>Cliente</th>
-          <th>Orden</th>
-          <th>Factura</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Juan Pérez</td><td>ORD-1001</td><td>FAC-9001</td><td>05/09/2025</td><td>✅ Pagada</td><td>$12,500</td></tr>
-        <tr><td>María López</td><td>ORD-1002</td><td>FAC-9002</td><td>07/09/2025</td><td>⏳ Pendiente</td><td>$8,200</td></tr>
-        <tr><td>Carlos Sánchez</td><td>ORD-1003</td><td>FAC-9003</td><td>08/09/2025</td><td>❌ Cancelada</td><td>$0</td></tr>
-        <tr><td>Ana Torres</td><td>ORD-1004</td><td>FAC-9004</td><td>09/09/2025</td><td>✅ Pagada</td><td>$5,750</td></tr>
-        <tr><td>Luis Gómez</td><td>ORD-1005</td><td>-</td><td>09/09/2025</td><td>⏳ Pendiente</td><td>$3,100</td></tr>
-        <tr><td>Sofía Herrera</td><td>ORD-1006</td><td>FAC-9006</td><td>10/09/2025</td><td>✅ Pagada</td><td>$9,800</td></tr>
-        <tr><td>Pedro Ramírez</td><td>ORD-1007</td><td>FAC-9007</td><td>11/09/2025</td><td>⏳ Pendiente</td><td>$2,450</td></tr>
-        <tr><td>Laura Méndez</td><td>ORD-1008</td><td>FAC-9008</td><td>11/09/2025</td><td>✅ Pagada</td><td>$6,900</td></tr>
-        <tr><td>Andrés Flores</td><td>ORD-1009</td><td>FAC-9009</td><td>12/09/2025</td><td>❌ Cancelada</td><td>$0</td></tr>
-        <tr><td>Gabriela Ruiz</td><td>ORD-1010</td><td>FAC-9010</td><td>12/09/2025</td><td>✅ Pagada</td><td>$14,200</td></tr>
-        <tr><td>Daniel Castro</td><td>ORD-1011</td><td>FAC-9011</td><td>13/09/2025</td><td>⏳ Pendiente</td><td>$4,600</td></tr>
-        <tr><td>Patricia Silva</td><td>ORD-1012</td><td>-</td><td>13/09/2025</td><td>✅ Pagada</td><td>$7,350</td></tr>
-        <tr><td>Ricardo Ortega</td><td>ORD-1013</td><td>FAC-9013</td><td>14/09/2025</td><td>✅ Pagada</td><td>$11,000</td></tr>
-        <tr><td>Fernanda Díaz</td><td>ORD-1014</td><td>FAC-9014</td><td>14/09/2025</td><td>⏳ Pendiente</td><td>$3,900</td></tr>
-        <tr><td>Hugo Morales</td><td>ORD-1015</td><td>FAC-9015</td><td>15/09/2025</td><td>✅ Pagada</td><td>$15,750</td></tr>
-      </tbody>
-    </table>
+<div class="form-card">
+  <h2>Órdenes por Cliente</h2>
+  
+  <div *ngIf="loading" style="text-align: center; padding: 20px;">
+    Cargando órdenes...
   </div>
-</body>
-</html>
+  
+  <div *ngIf="error" style="text-align: center; padding: 20px; color: #dc2626;">
+    {{ error }}
+  </div>
+  
+  <table class="styled-table" *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Orden</th>
+        <th>Factura</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.CustomerName }}</td>
+        <td>ORD-{{ order.OrderID.toString().padStart(3, '0') }}</td>
+        <td>{{ order.Invoice || '-' }}</td>
+        <td>{{ order.OrderDate | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ order.estado }}</td>
+      </tr>
+      <tr *ngIf="orders.length === 0">
+        <td colspan="5" style="text-align: center; padding: 20px;">
+          No hay órdenes registradas
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

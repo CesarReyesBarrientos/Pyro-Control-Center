@@ -1,16 +1,14 @@
 /* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
-  min-height: 98vh;
+
+/* ===== HOST STYLES ===== */
+:host {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   padding: 20px;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* ===== CARD ===== */
