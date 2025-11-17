@@ -49,6 +49,14 @@ export interface InventarioCreate {
   notas?: string;
 }
 
+export interface Order {
+  OrderID: number;
+  Invoice: string;
+  OrderDate: string;
+  estado: string;
+  CustomerName: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private http = inject(HttpClient);
@@ -67,5 +75,9 @@ export class ApiService {
 
   createProveedor(proveedor: NuevoProveedor) {
     return this.http.post<{ id: number }>(`${API}/api/proveedores`, proveedor);
+  }
+
+  getOrders() {
+    return this.http.get<Order[]>(`${API}/api/orders`);
   }
 }
