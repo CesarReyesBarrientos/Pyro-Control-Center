@@ -1,4 +1,3 @@
-
 <title>Registrar Nuevo Cliente</title>
 <body>
   <div class="form-card">
@@ -6,16 +5,22 @@
     <form id="formCliente">
       
       <label for="CustomerName">Nombre completo *</label>
-      <input type="text" id="CustomerName" name="CustomerName" required>
+      <input type="text" id="CustomerName" name="CustomerName"
+             required maxlength="255">
 
       <label for="email">Correo electrónico *</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email"
+             required maxlength="100">
 
       <label for="telefono">Teléfono *</label>
-      <input type="text" id="telefono" name="telefono" required>
+      <input type="tel" id="telefono" name="telefono"
+             required maxlength="20"
+             inputmode="tel"
+             pattern="[0-9+\s\-()]{7,20}"
+             title="Solo números, espacios, +, -, () y mínimo 7 caracteres.">
 
-      <label for="codigo_pais">Código de país</label>
-      <select id="codigo_pais" name="codigo_pais">
+      <label for="codigo_pais">Código de país *</label>
+      <select id="codigo_pais" name="codigo_pais" required>
         <option value="">Selecciona...</option>
         <option value="MX">🇲🇽 México (MX)</option>
         <option value="US">🇺🇸 Estados Unidos (US)</option>
@@ -26,16 +31,22 @@
       </select>
 
       <label for="direccion">Dirección</label>
-      <textarea id="direccion" name="direccion" rows="2"></textarea>
+      <textarea id="direccion" name="direccion" rows="2"
+                maxlength="255"></textarea>
 
       <label for="ciudad">Ciudad</label>
-      <input type="text" id="ciudad" name="ciudad">
+      <input type="text" id="ciudad" name="ciudad"
+             maxlength="100">
 
       <label for="estado">Estado</label>
-      <input type="text" id="estado" name="estado">
+      <input type="text" id="estado" name="estado"
+             maxlength="100">
 
       <label for="codigo_postal">Código Postal</label>
-      <input type="text" id="codigo_postal" name="codigo_postal">
+      <input type="text" id="codigo_postal" name="codigo_postal"
+             maxlength="10"
+             pattern="[0-9]{4,10}"
+             title="Entre 4 y 10 dígitos numéricos.">
 
       <label style="margin-top:15px; display:flex; align-items:center; gap:10px;">
         <input type="checkbox" id="activo" name="activo" checked>
@@ -48,8 +59,4 @@
       </div>
     </form>
   </div>
-
- 
 </body>
-
-

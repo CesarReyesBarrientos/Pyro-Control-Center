@@ -57,6 +57,18 @@ export interface Order {
   CustomerName: string;
 }
 
+export interface Customer {
+  CustomerName: string;
+  Email: string;
+  PhoneNumber: string;
+  CountryCode: string;
+  Address?: string;
+  City?: string;
+  State?: string;
+  PostalCode?: string;
+  estado?: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private http = inject(HttpClient);
@@ -79,5 +91,9 @@ export class ApiService {
 
   getOrders() {
     return this.http.get<Order[]>(`${API}/api/orders`);
+  }
+
+  createCustomer(customer: Customer) {
+    return this.http.post<{ message: string; customerId: number }>(`${API}/api/customers`, customer);
   }
 }
