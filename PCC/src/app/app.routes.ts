@@ -11,6 +11,8 @@ import { GestionInvComponent } from './components/gestion-inv/gestion-inv.compon
 import { ProductComponent } from './components/product/product.component';
 import { OrdenesCliComponent } from './components/ordenes-cli/ordenes-cli.component';
 import { ModoAlmacenComponent } from './modo-almacen/modo-almacen.component';
+import { ModoClientesComponent } from './modo-clientes/modo-clientes.component';
+import { ModoVentasComponent } from './modo-ventas/modo-ventas.component';
 import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-producto.component';
 import { RegistroCliente } from './components/registro-cliente/registro-cliente';
 
@@ -50,6 +52,16 @@ export const routes: Routes = [
     path: 'modo-almacen', 
     component: ModoAlmacenComponent,
     canActivate: [AuthGuard, almacenGuard] // Protegido por Almacén o Admin
+  },
+  {
+    path: 'modo-clientes', 
+    component: ModoClientesComponent,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
+  },
+  {
+    path: 'modo-ventas', 
+    component: ModoVentasComponent,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
   },
   { 
     path: 'nuevoprod', 
