@@ -83,6 +83,14 @@ export class ApiService {
     );
   }
 
+  getCategories() {
+    return this.http.get<string[]>(`${API}/api/inventory/categories`);
+  }
+
+  getUnits() {
+    return this.http.get<string[]>(`${API}/api/inventory/units`);
+  }
+
   createInventory(body: InventarioCreate) {
     return this.http.post<{ id: number }>(`${API}/api/inventory`, body);
   }
