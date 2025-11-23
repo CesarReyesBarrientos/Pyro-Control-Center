@@ -77,6 +77,12 @@ export class ApiService {
     return this.http.get<InventarioItem[]>(`${API}/api/inventory`);
   }
 
+  searchInventory(searchTerm: string) {
+    return this.http.get<{ success: boolean; count: number; data: InventarioItem[] }>(
+      `${API}/api/inventory/search?q=${encodeURIComponent(searchTerm)}`
+    );
+  }
+
   createInventory(body: InventarioCreate) {
     return this.http.post<{ id: number }>(`${API}/api/inventory`, body);
   }
