@@ -1,19 +1,70 @@
 import { Component, signal } from '@angular/core';
 import { ApiService, InventarioItem } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
   items = signal<InventarioItem[]>([]);
+  allItems = signal<InventarioItem[]>([]);
+  searchTerm = signal<string>('');
+  isSearching = signal<boolean>(false);
+  searchResultCount = signal<number>(0);
 
   constructor(private api: ApiService) {
-    this.api.getInventory().subscribe(data => this.items.set(data));
+    this.loadAllProducts();
+  }
+
+  loadAllProducts() {
+    this.api.getInventory().subscribe(data => {
+      this.allItems.set(data);
+      this.items.set(data);
+    });
+  }
+
+  onSearchChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const term = input.value.trim();
+    this.searchTerm.set(term);
+
+    if (term === '') {
+      this.items.set(this.allItems());
+      this.isSearching.set(false);
+      this.searchResultCount.set(0);
+      return;
+    }
+
+    if (term.length >= 2) {
+      this.isSearching.set(true);
+      console.log('🔍 Buscando:', term);
+      this.api.searchInventory(term).subscribe({
+        next: (response) => {
+          console.log('✅ Resultados:', response);
+          this.items.set(response.data);
+          this.searchResultCount.set(response.count);
+          this.isSearching.set(false);
+        },
+        error: (error) => {
+          console.error('❌ Error en búsqueda:', error);
+          console.error('Status:', error.status);
+          console.error('URL:', error.url);
+          this.isSearching.set(false);
+        }
+      });
+    }
+  }
+
+  clearSearch() {
+    this.searchTerm.set('');
+    this.items.set(this.allItems());
+    this.isSearching.set(false);
+    this.searchResultCount.set(0);
   }
 
   sku(id: number) {
