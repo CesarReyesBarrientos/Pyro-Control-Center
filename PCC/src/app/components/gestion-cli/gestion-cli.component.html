@@ -1,10 +1,37 @@
-<body>
-  <div class="container">
-    <div class="title">
-      <span class="pyro">Pyro</span><span class="control">Control</span><span class="center"> Center</span>
-    </div>
-    <div class="subtitle">inspiring changes</div>
+<div class="form-card">
+  <h2>Gestión de Clientes</h2>
+  
+  <div *ngIf="loading" style="text-align: center; padding: 20px;">
+    Cargando clientes...
   </div>
-
-  <h1 class="control">Productos en inventario</h1>
-</body>
+  
+  <div *ngIf="error" style="text-align: center; padding: 20px; color: #dc2626;">
+    {{ error }}
+  </div>
+  
+  <table class="styled-table" *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th>Dirección</th>
+        <th>País</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.cliente }}</td>
+        <td>{{ customer.telefono }}</td>
+        <td>{{ customer.correo }}</td>
+        <td>{{ customer.direccion }}</td>
+        <td>{{ customer.pais }}</td>
+      </tr>
+      <tr *ngIf="customers.length === 0">
+        <td colspan="5" style="text-align: center; padding: 20px;">
+          No hay clientes registrados
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

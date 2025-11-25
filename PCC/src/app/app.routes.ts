@@ -15,6 +15,7 @@ import { ModoClientesComponent } from './modo-clientes/modo-clientes.component';
 import { ModoVentasComponent } from './modo-ventas/modo-ventas.component';
 import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-producto.component';
 import { RegistroCliente } from './components/registro-cliente/registro-cliente';
+import { NuevaOrdenComponent } from './components/nueva-orden/nueva-orden.component';
 
 // --- Guards ---
 import { AuthGuard } from '@auth0/auth0-angular';
@@ -76,6 +77,11 @@ export const routes: Routes = [
   {
     path: 'registro-cliente',
     component: RegistroCliente,
+    canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
+  },
+  {
+    path: 'nueva-orden',
+    component: NuevaOrdenComponent,
     canActivate: [AuthGuard, ventasGuard] // Protegido por Ventas o Admin
   },
 

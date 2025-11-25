@@ -50,22 +50,26 @@ export interface InventarioCreate {
 }
 
 export interface Order {
-  OrderID: number;
+  OrderID?: number;
+  CustomerID: number;
   Invoice: string;
   OrderDate: string;
+  PaymentMethod: string;
   estado: string;
-  CustomerName: string;
+  Notes?: string;
+  CustomerName?: string;
 }
 
 export interface Customer {
+  CustomerID?: number;
   CustomerName: string;
   Email: string;
   PhoneNumber: string;
   CountryCode: string;
   Address?: string;
-  City?: string;
   State?: string;
   PostalCode?: string;
+  CountryName?: string;
   estado?: number;
 }
 
@@ -105,6 +109,14 @@ export class ApiService {
 
   getOrders() {
     return this.http.get<Order[]>(`${API}/api/orders`);
+  }
+
+  createOrder(order: Order) {
+    return this.http.post<{ message: string; orderId: number }>(`${API}/api/orders`, order);
+  }
+
+  getCustomers() {
+    return this.http.get<Customer[]>(`${API}/api/customers`);
   }
 
   createCustomer(customer: Customer) {

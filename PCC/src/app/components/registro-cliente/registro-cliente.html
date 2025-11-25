@@ -30,23 +30,24 @@
         <option value="56">🇨🇱 Chile (CL)</option>
       </select>
 
-      <label for="direccion">Dirección</label>
+      <label for="direccion">Dirección *</label>
       <textarea id="direccion" name="direccion" rows="2"
-                maxlength="255"></textarea>
+                maxlength="255" required></textarea>
 
-      <label for="ciudad">Ciudad</label>
-      <input type="text" id="ciudad" name="ciudad"
-             maxlength="100">
-
-      <label for="estado">Estado</label>
+      <label for="estado">Estado *</label>
       <input type="text" id="estado" name="estado"
-             maxlength="100">
+             maxlength="100" required>
 
-      <label for="codigo_postal">Código Postal</label>
+      <label for="pais">País *</label>
+      <input type="text" id="pais" name="pais"
+             maxlength="100" required>
+
+      <label for="codigo_postal">Código Postal *</label>
       <input type="text" id="codigo_postal" name="codigo_postal"
              maxlength="10"
              pattern="[0-9]{4,10}"
-             title="Entre 4 y 10 dígitos numéricos.">
+             title="Entre 4 y 10 dígitos numéricos."
+             required>
 
       <label style="margin-top:15px; display:flex; align-items:center; gap:10px;">
         <input type="checkbox" id="activo" name="activo" checked>

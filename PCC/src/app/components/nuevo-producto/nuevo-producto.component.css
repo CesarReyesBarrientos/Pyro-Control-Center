@@ -1,10 +1,17 @@
     /* Box sizing consistente */
     *, *::before, *::after { box-sizing: border-box; }
 
+    :host {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #f0f4ff, #e9ecf7);
-      padding: 40px;
       margin: 0;
     }
 
@@ -13,7 +20,7 @@
       border-radius: 14px;
       padding: 30px;
       max-width: 900px;
-      margin: auto;
+      width: 100%;
       box-shadow: 0 8px 18px rgba(0,0,0,0.12);
       border-top: 8px solid #2563eb;
       animation: fadeIn 0.6s ease;

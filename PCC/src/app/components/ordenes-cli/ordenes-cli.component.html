@@ -21,11 +21,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let order of orders">
-        <td>{{ order.CustomerName }}</td>
-        <td>ORD-{{ order.OrderID.toString().padStart(3, '0') }}</td>
+        <td>{{ order.CustomerName || '-' }}</td>
+        <td>{{ order.OrderID ? 'ORD-' + order.OrderID.toString().padStart(3, '0') : '-' }}</td>
         <td>{{ order.Invoice || '-' }}</td>
-        <td>{{ order.OrderDate | date: 'dd/MM/yyyy' }}</td>
-        <td>{{ order.estado }}</td>
+        <td>{{ order.OrderDate ? (order.OrderDate | date: 'dd/MM/yyyy') : '-' }}</td>
+        <td>{{ order.estado || '-' }}</td>
       </tr>
       <tr *ngIf="orders.length === 0">
         <td colspan="5" style="text-align: center; padding: 20px;">

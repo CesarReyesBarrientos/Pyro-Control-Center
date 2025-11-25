@@ -19,9 +19,7 @@ export class ModoVentasComponent {
 
     // Navegación inmediata según la imagen seleccionada
     if (module === 'agregar') {
-      // TODO: Aquí irá la ruta para agregar orden cuando la crees
-      console.log('Agregar orden - ruta pendiente');
-      // this.router.navigate(['/agregar-orden']); 
+      this.router.navigate(['/nueva-orden']); 
     } else if (module === 'ver') {
       this.router.navigate(['/ordenes-cli']);
     }
