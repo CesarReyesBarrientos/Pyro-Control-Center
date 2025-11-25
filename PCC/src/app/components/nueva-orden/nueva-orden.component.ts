@@ -76,7 +76,6 @@ export class NuevaOrdenComponent implements OnInit {
     const fecha = formData.get('fecha') as string;
     const metodoPago = formData.get('metodo_pago') as string;
     const estatus = formData.get('estatus') as string;
-    const notas = formData.get('notas') as string;
     
     // Validar campos requeridos
     if (!producto || !cliente || !factura || !fecha || !metodoPago || !estatus) {
@@ -86,11 +85,11 @@ export class NuevaOrdenComponent implements OnInit {
     
     const order: Order = {
       CustomerID: parseInt(cliente),
+      Product: producto,
       Invoice: factura,
       OrderDate: fecha,
       PaymentMethod: metodoPago,
-      estado: estatus,
-      Notes: notas || ''
+      estado: estatus
     };
     
     // Enviar al backend

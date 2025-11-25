@@ -52,11 +52,11 @@ export interface InventarioCreate {
 export interface Order {
   OrderID?: number;
   CustomerID: number;
+  Product?: string;
   Invoice: string;
   OrderDate: string;
   PaymentMethod: string;
   estado: string;
-  Notes?: string;
   CustomerName?: string;
 }
 

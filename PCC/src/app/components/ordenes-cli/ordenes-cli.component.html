@@ -14,8 +14,10 @@
       <tr>
         <th>Cliente</th>
         <th>Orden</th>
+        <th>Producto</th>
         <th>Factura</th>
         <th>Fecha</th>
+        <th>Método de Pago</th>
         <th>Estado</th>
       </tr>
     </thead>
@@ -23,12 +25,14 @@
       <tr *ngFor="let order of orders">
         <td>{{ order.CustomerName || '-' }}</td>
         <td>{{ order.OrderID ? 'ORD-' + order.OrderID.toString().padStart(3, '0') : '-' }}</td>
+        <td>{{ order.Product || '-' }}</td>
         <td>{{ order.Invoice || '-' }}</td>
         <td>{{ order.OrderDate ? (order.OrderDate | date: 'dd/MM/yyyy') : '-' }}</td>
+        <td>{{ order.PaymentMethod || '-' }}</td>
         <td>{{ order.estado || '-' }}</td>
       </tr>
       <tr *ngIf="orders.length === 0">
-        <td colspan="5" style="text-align: center; padding: 20px;">
+        <td colspan="7" style="text-align: center; padding: 20px;">
           No hay órdenes registradas
         </td>
       </tr>
