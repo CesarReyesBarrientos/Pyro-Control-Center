@@ -13,6 +13,16 @@ export interface Proveedor {
   rfc: string;
 }
 
+export interface Supplier {
+  id: number;
+  nombre: string;
+  telefono?: string;
+  email?: string;
+  direccion?: string;
+  rfc?: string;
+  estado?: number;
+}
+
 export interface NuevoProveedor {
   nombre: string;
   telefono: string;
@@ -30,11 +40,13 @@ export interface InventarioItem {
   stock_actual?: number;
   stock?: number;     // Campo antiguo
   stock_minimo?: number;
+  minstock?: number;  // Campo antiguo
   unidad_de_medida: string;
   precio?: number;
   proveedor_id?: number;
   proveedor_nombre?: string;
   notas?: string;
+  estado?: number;
 }
 
 export interface InventarioCreate {
@@ -101,6 +113,14 @@ export class ApiService {
 
   deleteProduct(id: number) {
     return this.http.delete<{ message: string }>(`${API}/api/inventory/${id}`);
+  }
+
+  updateProduct(id: number, product: any) {
+    return this.http.put<{ message: string }>(`${API}/api/inventory/${id}`, product);
+  }
+
+  getSuppliers() {
+    return this.http.get<Supplier[]>(`${API}/api/proveedores`);
   }
 
   getProveedores() {

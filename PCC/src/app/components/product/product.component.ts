@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { ApiService, InventarioItem } from '../../services/app.service';
+import { ApiService, InventarioItem, Supplier } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -26,9 +26,25 @@ export class ProductComponent {
   selectedSupplier = signal<string>('');
   selectedUnit = signal<string>('');
 
+  // Modal de edición
+  showEditModal = signal<boolean>(false);
+  allSuppliers = signal<Supplier[]>([]);
+  editForm: any = {
+    id: null,
+    nombre: '',
+    categoria: '',
+    stock_actual: 0,
+    stock_minimo: 0,
+    unidad_de_medida: '',
+    precio: 0,
+    proveedor_id: null,
+    notas: ''
+  };
+
   constructor(private api: ApiService) {
     this.loadAllProducts();
     this.loadFilters();
+    this.loadSuppliers();
   }
 
   loadAllProducts() {
@@ -42,6 +58,10 @@ export class ProductComponent {
   loadFilters() {
     this.api.getCategories().subscribe(data => this.categories.set(data));
     this.api.getUnits().subscribe(data => this.units.set(data));
+  }
+
+  loadSuppliers() {
+    this.api.getSuppliers().subscribe(data => this.allSuppliers.set(data));
   }
 
   extractSuppliers(items: InventarioItem[]) {
@@ -187,12 +207,49 @@ export class ProductComponent {
       next: (response) => {
         console.log('✅ Producto dado de baja:', response.message);
         alert('Producto dado de baja correctamente');
-        // Recargar la lista de productos
         this.loadAllProducts();
       },
       error: (error) => {
         console.error('❌ Error al dar de baja el producto:', error);
         alert('Error al dar de baja el producto. Por favor, intenta nuevamente.');
+      }
+    });
+  }
+
+  openEditModal(item: InventarioItem) {
+    this.editForm = {
+      id: item.id,
+      nombre: item.nombre || item.producto || '',
+      categoria: item.categoria || '',
+      stock_actual: item.stock_actual || item.stock || 0,
+      stock_minimo: item.stock_minimo || item.minstock || 0,
+      unidad_de_medida: item.unidad_de_medida || '',
+      precio: item.precio || 0,
+      proveedor_id: item.proveedor_id || null,
+      notas: item.notas || ''
+    };
+    this.showEditModal.set(true);
+  }
+
+  closeEditModal() {
+    this.showEditModal.set(false);
+  }
+
+  saveEdit(event: Event) {
+    event.preventDefault();
+    
+    if (!this.editForm.id) return;
+
+    this.api.updateProduct(this.editForm.id, this.editForm).subscribe({
+      next: (response) => {
+        console.log('✅ Producto actualizado:', response);
+        alert('Producto actualizado correctamente');
+        this.closeEditModal();
+        this.loadAllProducts();
+      },
+      error: (error) => {
+        console.error('❌ Error al actualizar producto:', error);
+        alert('Error al actualizar el producto. Por favor, intenta nuevamente.');
       }
     });
   }

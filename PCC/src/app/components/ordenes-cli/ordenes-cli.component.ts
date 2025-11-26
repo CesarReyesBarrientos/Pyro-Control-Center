@@ -137,9 +137,12 @@ export class OrdenesCliComponent implements OnInit {
   }
 
   applyFilters(): void {
+    console.log('🔍 Aplicando filtros:', this.filters);
     this.filteredOrders = this.orders.filter(order => {
-      const matchCustomer = !this.filters.customer || 
-        order.CustomerName?.toLowerCase().includes(this.filters.customer.toLowerCase());
+      const customerName = (order.CustomerName || '').toLowerCase();
+      const filterCustomer = (this.filters.customer || '').toLowerCase().trim();
+      
+      const matchCustomer = !filterCustomer || customerName.includes(filterCustomer);
       
       const matchProduct = !this.filters.product || 
         order.Product === this.filters.product;
@@ -152,6 +155,7 @@ export class OrdenesCliComponent implements OnInit {
       
       return matchCustomer && matchProduct && matchPaymentMethod && matchEstado;
     });
+    console.log('✅ Órdenes filtradas:', this.filteredOrders.length, 'de', this.orders.length);
   }
 
   clearFilters(): void {

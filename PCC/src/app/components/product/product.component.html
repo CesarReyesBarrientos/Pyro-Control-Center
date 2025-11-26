@@ -147,6 +147,15 @@
             <td>{{ i.proveedor_nombre }}</td>
             <td>
               <button 
+                class="btn-edit" 
+                (click)="openEditModal(i)"
+                title="Editar producto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </button>
+              <button 
                 class="btn-delete" 
                 (click)="deleteProduct(i.id, i.nombre || i.producto || 'este producto')"
                 title="Dar de baja producto">
@@ -164,5 +173,119 @@
       </tbody>
     </table>
   </div>
+
+  <!-- Modal de edición -->
+  @if (showEditModal()) {
+    <div class="modal-overlay" (click)="closeEditModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Editar Producto</h3>
+          <button class="close-btn" (click)="closeEditModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <form class="modal-form" (submit)="saveEdit($event)">
+          <div class="form-group">
+            <label for="edit-nombre">Nombre *</label>
+            <input 
+              type="text" 
+              id="edit-nombre" 
+              [(ngModel)]="editForm.nombre"
+              name="nombre"
+              required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edit-categoria">Categoría *</label>
+              <input 
+                type="text" 
+                id="edit-categoria" 
+                [(ngModel)]="editForm.categoria"
+                name="categoria"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-unidad">Unidad *</label>
+              <input 
+                type="text" 
+                id="edit-unidad" 
+                [(ngModel)]="editForm.unidad_de_medida"
+                name="unidad_de_medida"
+                required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edit-stock">Stock Actual *</label>
+              <input 
+                type="number" 
+                id="edit-stock" 
+                [(ngModel)]="editForm.stock_actual"
+                name="stock_actual"
+                step="0.001"
+                min="0"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-minstock">Stock Mínimo *</label>
+              <input 
+                type="number" 
+                id="edit-minstock" 
+                [(ngModel)]="editForm.stock_minimo"
+                name="stock_minimo"
+                step="0.001"
+                min="0"
+                required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-precio">Precio *</label>
+            <input 
+              type="number" 
+              id="edit-precio" 
+              [(ngModel)]="editForm.precio"
+              name="precio"
+              step="0.01"
+              min="0"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-proveedor">Proveedor</label>
+            <select 
+              id="edit-proveedor" 
+              [(ngModel)]="editForm.proveedor_id"
+              name="proveedor_id">
+              <option [value]="null">Sin proveedor</option>
+              <option *ngFor="let sup of allSuppliers()" [value]="sup.id">{{ sup.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-notas">Notas</label>
+            <textarea 
+              id="edit-notas" 
+              [(ngModel)]="editForm.notas"
+              name="notas"
+              rows="3"></textarea>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" (click)="closeEditModal()">Cancelar</button>
+            <button type="submit" class="btn-save">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 </body>
 </html>
