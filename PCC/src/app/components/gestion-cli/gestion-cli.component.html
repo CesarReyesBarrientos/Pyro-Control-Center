@@ -29,6 +29,15 @@
         <td>{{ customer.pais }}</td>
         <td>
           <button 
+            class="btn-edit" 
+            (click)="editCustomer(customer)"
+            title="Editar cliente">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button 
             class="btn-delete" 
             (click)="deleteCustomer(customer.customerId, customer.cliente)"
             title="Dar de baja cliente">
@@ -49,4 +58,85 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal de edición -->
+<div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Editar Cliente</h3>
+    <form class="edit-form">
+      <div class="form-group">
+        <label>Nombre del Cliente *</label>
+        <input type="text" [(ngModel)]="editForm.CustomerName" name="customerName" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email *</label>
+        <input 
+          type="email" 
+          [(ngModel)]="editForm.Email" 
+          name="email" 
+          required 
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          #emailInput="ngModel" />
+        <span class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+          Ingresa un correo válido (ejemplo@dominio.com)
+        </span>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Código de País</label>
+          <input 
+            type="text" 
+            [(ngModel)]="editForm.CountryCode" 
+            name="countryCode"
+            pattern="[0-9]{1,4}"
+            #countryCodeInput="ngModel" />
+          <span class="error-message" *ngIf="countryCodeInput.invalid && countryCodeInput.touched">
+            Solo números (1-4 dígitos)
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input 
+            type="tel" 
+            [(ngModel)]="editForm.PhoneNumber" 
+            name="phoneNumber"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            #phoneInput="ngModel" />
+          <span class="error-message" *ngIf="phoneInput.invalid && phoneInput.touched">
+            Debe ser un número de 10 dígitos
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" [(ngModel)]="editForm.Address" name="address" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Estado</label>
+          <input type="text" [(ngModel)]="editForm.State" name="state" />
+        </div>
+        <div class="form-group">
+          <label>Código Postal</label>
+          <input type="text" [(ngModel)]="editForm.PostalCode" name="postalCode" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>País</label>
+        <input type="text" [(ngModel)]="editForm.CountryName" name="countryName" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="closeEditModal()">Cancelar</button>
+        <button type="button" class="btn-save" (click)="saveCustomer()">Guardar</button>
+      </div>
+    </form>
+  </div>
 </div>
