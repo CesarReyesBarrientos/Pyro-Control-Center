@@ -119,8 +119,16 @@ export class ApiService {
     return this.http.post<{ message: string; orderId: number }>(`${API}/api/orders`, order);
   }
 
+  updateOrder(id: number, order: Order) {
+    return this.http.put<{ message: string }>(`${API}/api/orders/${id}`, order);
+  }
+
   deactivateOrder(id: number) {
     return this.http.delete<{ message: string }>(`${API}/api/orders/${id}`);
+  }
+
+  downloadOrderPDF(id: number) {
+    return this.http.get(`${API}/api/orders/${id}/pdf`, { responseType: 'blob' });
   }
 
   getCustomers() {
@@ -129,6 +137,10 @@ export class ApiService {
 
   createCustomer(customer: Customer) {
     return this.http.post<{ message: string; customerId: number }>(`${API}/api/customers`, customer);
+  }
+
+  updateCustomer(id: number, customer: Customer) {
+    return this.http.put<{ message: string }>(`${API}/api/customers/${id}`, customer);
   }
 
   deactivateCustomer(id: number) {
