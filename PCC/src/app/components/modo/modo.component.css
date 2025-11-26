@@ -8,10 +8,14 @@
 body {
   background-color: #fff;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 98vh;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {

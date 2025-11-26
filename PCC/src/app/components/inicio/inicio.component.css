@@ -12,10 +12,13 @@
   }
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
   background-color: rgb(21, 50, 244);
-  background-attachment: fixed; 
+  background-attachment: fixed;
   display: flex;
-  height: 98vh;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 }
