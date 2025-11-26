@@ -1,10 +1,11 @@
 // src/app/app.config.ts
 
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAuth0 } from '@auth0/auth0-angular';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,11 @@ export const appConfig: ApplicationConfig = {
       
       // Usar refresh tokens
       useRefreshTokens: true,
+    }),
+    
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ]
 };
