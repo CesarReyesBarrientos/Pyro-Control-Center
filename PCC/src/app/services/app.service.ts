@@ -99,6 +99,10 @@ export class ApiService {
     return this.http.post<{ id: number }>(`${API}/api/inventory`, body);
   }
 
+  deleteProduct(id: number) {
+    return this.http.delete<{ message: string }>(`${API}/api/inventory/${id}`);
+  }
+
   getProveedores() {
     return this.http.get<Proveedor[]>(`${API}/api/proveedores`);
   }
@@ -115,11 +119,19 @@ export class ApiService {
     return this.http.post<{ message: string; orderId: number }>(`${API}/api/orders`, order);
   }
 
+  deactivateOrder(id: number) {
+    return this.http.delete<{ message: string }>(`${API}/api/orders/${id}`);
+  }
+
   getCustomers() {
     return this.http.get<Customer[]>(`${API}/api/customers`);
   }
 
   createCustomer(customer: Customer) {
     return this.http.post<{ message: string; customerId: number }>(`${API}/api/customers`, customer);
+  }
+
+  deactivateCustomer(id: number) {
+    return this.http.put<{ message: string }>(`${API}/api/customers/${id}/deactivate`, {});
   }
 }
