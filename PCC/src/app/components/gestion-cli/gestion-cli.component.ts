@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService, Customer } from '../../services/app.service';
 
 interface CustomerDisplay {
+  customerId: number;
   cliente: string;
   telefono: string;
   correo: string;
@@ -35,6 +36,7 @@ export class GestionCliComponent implements OnInit {
     this.apiService.getCustomers().subscribe({
       next: (data: Customer[]) => {
         this.customers = data.map(customer => ({
+          customerId: customer.CustomerID || 0,
           cliente: customer.CustomerName || '-',
           telefono: this.formatPhone(customer.CountryCode, customer.PhoneNumber),
           correo: customer.Email || '-',
@@ -63,5 +65,25 @@ export class GestionCliComponent implements OnInit {
     if (state) parts.push(state);
     if (postalCode) parts.push(`CP ${postalCode}`);
     return parts.length > 0 ? parts.join(', ') : '-';
+  }
+
+  deleteCustomer(customerId: number, nombre: string) {
+    const confirmacion = confirm(
+      `¿Estás seguro de dar de baja el cliente "${nombre}"?`
+    );
+
+    if (!confirmacion) return;
+
+    this.apiService.deactivateCustomer(customerId).subscribe({
+      next: (response) => {
+        console.log('✅ Cliente dado de baja:', response.message);
+        alert('Cliente dado de baja correctamente');
+        this.loadCustomers();
+      },
+      error: (error) => {
+        console.error('❌ Error al dar de baja el cliente:', error);
+        alert('Error al dar de baja el cliente. Por favor, intenta nuevamente.');
+      }
+    });
   }
 }

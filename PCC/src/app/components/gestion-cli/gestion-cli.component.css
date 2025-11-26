@@ -64,6 +64,36 @@ h2 {
   transition: 0.25s;
 }
 
+/* ===== ACTION BUTTONS ===== */
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+  transform: scale(1.1);
+}
+
+.btn-delete:active {
+  transform: scale(1);
+  background: #fee2e2;
+}
+
+.btn-delete svg {
+  display: block;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }

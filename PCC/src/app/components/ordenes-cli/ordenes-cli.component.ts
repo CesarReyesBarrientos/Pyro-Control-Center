@@ -34,4 +34,26 @@ export class OrdenesCliComponent implements OnInit {
       }
     });
   }
+
+  deleteOrder(orderId: number | undefined, invoice: string) {
+    if (!orderId) return;
+
+    const confirmacion = confirm(
+      `¿Estás seguro de dar de baja la orden "${invoice}"?`
+    );
+
+    if (!confirmacion) return;
+
+    this.apiService.deactivateOrder(orderId).subscribe({
+      next: (response) => {
+        console.log('✅ Orden dada de baja:', response.message);
+        alert('Orden dada de baja correctamente');
+        this.loadOrders();
+      },
+      error: (error) => {
+        console.error('❌ Error al dar de baja la orden:', error);
+        alert('Error al dar de baja la orden. Por favor, intenta nuevamente.');
+      }
+    });
+  }
 }

@@ -175,4 +175,25 @@ export class ProductComponent {
 
     return current <= minimum;
   }
+
+  deleteProduct(id: number, nombre: string) {
+    const confirmacion = confirm(
+      `¿Estás seguro de dar de baja el producto "${nombre}"?`
+    );
+
+    if (!confirmacion) return;
+
+    this.api.deleteProduct(id).subscribe({
+      next: (response) => {
+        console.log('✅ Producto dado de baja:', response.message);
+        alert('Producto dado de baja correctamente');
+        // Recargar la lista de productos
+        this.loadAllProducts();
+      },
+      error: (error) => {
+        console.error('❌ Error al dar de baja el producto:', error);
+        alert('Error al dar de baja el producto. Por favor, intenta nuevamente.');
+      }
+    });
+  }
 }
