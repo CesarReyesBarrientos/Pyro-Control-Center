@@ -18,9 +18,13 @@
 }
 
 html, body {
-  height: 98vh;
-  background-color: rgb(21, 50, 244);
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
   overflow: hidden;
+  overflow-x: hidden;
   font-family: 'norm', sans-serif;
 }
 

@@ -1,6 +1,6 @@
     /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #091b41, #0f1b3d); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 30px; }
+    body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b, #111827); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 30px; }
 
     /* ===== CARD ===== */
     .form-card {

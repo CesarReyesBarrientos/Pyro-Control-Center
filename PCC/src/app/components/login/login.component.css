@@ -6,10 +6,14 @@
 }
 
 body {
-  height: 98vh;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-image: url('../../../assets/images/loginwallpapers.png');
-  background-size: cover;          /* Para que la imagen de fondo se ajuste */
-  background-position: center;     /* Centra la imagen */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
