@@ -17,7 +17,19 @@
     </select>
 
     <label for="factura">Número de factura *</label>
-    <input type="text" id="factura" name="factura" required>
+    <input 
+      type="text" 
+      id="factura" 
+      name="factura" 
+      placeholder="FAC-2024-0001"
+      pattern="[A-Z]{3}-[0-9]{4}-[0-9]{4,6}"
+      title="Formato: XXX-YYYY-NNNN (ejemplo: FAC-2024-0001)"
+      maxlength="20"
+      required>
+    <small class="helper-text">Formato: XXX-YYYY-NNNN (ejemplo: FAC-2024-0001)</small>
+    @if (invoiceError()) {
+      <small class="error-text">{{ invoiceError() }}</small>
+    }
 
     <label for="fecha">Fecha de orden *</label>
     <input type="date" id="fecha" name="fecha" required>

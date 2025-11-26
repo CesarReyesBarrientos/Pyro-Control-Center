@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService, Customer, Order } from '../../services/app.service';
 
@@ -13,6 +13,8 @@ export class NuevaOrdenComponent implements OnInit {
   private apiService = inject(ApiService);
   customers: Customer[] = [];
   loading: boolean = false;
+  invoiceError = signal<string>('');
+  private validationTimeout: any = null;
 
   ngOnInit(): void {
     this.loadCustomers();
@@ -21,6 +23,67 @@ export class NuevaOrdenComponent implements OnInit {
     if (form) {
       form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
+
+    // Agregar listener para validar factura en tiempo real
+    const invoiceInput = document.getElementById('factura') as HTMLInputElement;
+    if (invoiceInput) {
+      invoiceInput.addEventListener('input', (e) => this.onInvoiceChange(e));
+      invoiceInput.addEventListener('blur', (e) => this.onInvoiceBlur(e));
+    }
+  }
+
+  onInvoiceChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.toUpperCase().trim();
+    
+    // Actualizar el input con el valor normalizado
+    input.value = value;
+    
+    // Limpiar timeout anterior
+    if (this.validationTimeout) {
+      clearTimeout(this.validationTimeout);
+    }
+    
+    // Validar solo si tiene el formato correcto
+    const invoicePattern = /^[A-Z]{3}-\d{4}-\d{4,6}$/;
+    if (value && invoicePattern.test(value)) {
+      // Esperar 500ms después de que el usuario deje de escribir
+      this.validationTimeout = setTimeout(() => {
+        this.validateInvoiceExists(value);
+      }, 500);
+    } else if (value) {
+      this.invoiceError.set('');
+    } else {
+      this.invoiceError.set('');
+    }
+  }
+
+  onInvoiceBlur(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value.toUpperCase().trim();
+    
+    if (value) {
+      const invoicePattern = /^[A-Z]{3}-\d{4}-\d{4,6}$/;
+      if (invoicePattern.test(value)) {
+        this.validateInvoiceExists(value);
+      }
+    }
+  }
+
+  validateInvoiceExists(invoice: string): void {
+    this.apiService.validateInvoice(invoice).subscribe({
+      next: (response) => {
+        if (response.exists) {
+          this.invoiceError.set(`❌ La factura "${invoice}" ya existe. Use un número diferente.`);
+        } else {
+          this.invoiceError.set('');
+        }
+      },
+      error: (err) => {
+        console.error('Error validando factura:', err);
+        this.invoiceError.set('');
+      }
+    });
   }
 
   loadCustomers(): void {
@@ -72,7 +135,7 @@ export class NuevaOrdenComponent implements OnInit {
     // Extraer datos del formulario
     const producto = formData.get('producto') as string;
     const cliente = formData.get('cliente') as string;
-    const factura = formData.get('factura') as string;
+    let factura = formData.get('factura') as string;
     const fecha = formData.get('fecha') as string;
     const metodoPago = formData.get('metodo_pago') as string;
     const estatus = formData.get('estatus') as string;
@@ -83,10 +146,26 @@ export class NuevaOrdenComponent implements OnInit {
       return;
     }
     
+    // Normalizar factura a mayúsculas
+    factura = factura.toUpperCase().trim();
+    
+    // Validar formato de factura
+    const invoicePattern = /^[A-Z]{3}-\d{4}-\d{4,6}$/;
+    if (!invoicePattern.test(factura)) {
+      alert('❌ Formato de factura inválido. Use: XXX-YYYY-NNNN (ejemplo: FAC-2024-0001)');
+      return;
+    }
+
+    // Verificar si hay error de factura duplicada
+    if (this.invoiceError()) {
+      alert(this.invoiceError());
+      return;
+    }
+    
     const order: Order = {
       CustomerID: parseInt(cliente),
       Product: producto,
-      Invoice: factura,
+      Invoice: factura, // Ya normalizada a mayúsculas
       OrderDate: fecha,
       PaymentMethod: metodoPago,
       estado: estatus
@@ -101,7 +180,8 @@ export class NuevaOrdenComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al crear orden:', err);
-        alert('❌ Error al crear la orden. Por favor verifica los datos.');
+        const errorMsg = err.error?.message || 'Error al crear la orden. Por favor verifica los datos.';
+        alert('❌ ' + errorMsg);
       }
     });
   }

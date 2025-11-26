@@ -135,6 +135,10 @@ export class ApiService {
     return this.http.get<Order[]>(`${API}/api/orders`);
   }
 
+  validateInvoice(invoice: string) {
+    return this.http.get<{ exists: boolean; invoice: string }>(`${API}/api/orders/validate-invoice/${invoice}`);
+  }
+
   createOrder(order: Order) {
     return this.http.post<{ message: string; orderId: number }>(`${API}/api/orders`, order);
   }
