@@ -1,0 +1,160 @@
+{
+  "configVersion": 1,
+  "timestamp": 1764215607062,
+  "index": "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/favicon.ico",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/index.html",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/main-N2C2HOIS.js",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/polyfills-5CFQRCPP.js",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/styles-K32SSY7H.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Bold.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Medium.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Regular.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-SemiBold.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/LICENSE.txt",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Black.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-BlackItalic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Bold.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-BoldItalic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Italic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Light.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-LightItalic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Medium.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-MediumItalic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Regular.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Thin.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-ThinItalic.ttf",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/almacen.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/ventas.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-128x128.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-144x144.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-152x152.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-192x192.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-384x384.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-512x512.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-72x72.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-96x96.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregar_cliente.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregar_orden.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregarproducto.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/almacen.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/cerillow.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/clientes.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/explosionw.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/fuegow.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/icon.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/loginwallpaper.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/loginwallpapers.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ventas.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ver_cliente.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ver_ordenes.png",
+        "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/verinventario.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-calls",
+      "patterns": [
+        "http:\\/\\/localhost:3000\\/api\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 100,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Bold.ttf": "e71feaec30e28858890521f4116b468c44efec08",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Medium.ttf": "87a6e053561e2e4fe46ec1a5bde939c7852bb279",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-Regular.ttf": "c3c969c44a97760dd2dfd01c452976c725307b42",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Caveat/Caveat-SemiBold.ttf": "42b0a68e442e972219b83c8329e83d5c27f6a1a0",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/LICENSE.txt": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Black.ttf": "3f8e401d808f6ce84b542266726514ac8be73171",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-BlackItalic.ttf": "03d6e3747d862385dbe48e8296385b9236101a62",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Bold.ttf": "62442a18a9fe9457c1afeabf683d263a691b7798",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-BoldItalic.ttf": "2f10ad9e8cab0880182705c4e0fbaeabae706e64",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Italic.ttf": "65f3f6a7e1bd2fa6f2df35e4b07775d7f1dde4f0",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Light.ttf": "18788c5d630fa695f9283f6393bfa541b2031508",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-LightItalic.ttf": "6e01f9df9449565697032b002706a94b51862bbe",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Medium.ttf": "3c6a09fcc6a454924c81af7dff94fc6d399ed79b",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-MediumItalic.ttf": "b3aa2d8f16d5a331fdced82f213a052b204eaca0",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Regular.ttf": "56c5c0d38bde4c1f1549dda43db37b09c608aad3",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-Thin.ttf": "58c733e22bceeaf9609ce578eca92ac303c6d92f",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/Roboto-ThinItalic.ttf": "cc79d5a23bd0ec08b1d99f5390bf33cacc3082f4",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/almacen.png": "5f36351112ac503f5ef27cc2c40573eacfbfad10",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/Roboto/ventas.png": "32a01a654e9b79dde51a2e12d0a9bc2d9a8b5e20",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-128x128.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-144x144.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-152x152.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-192x192.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-384x384.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-512x512.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-72x72.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/icons/icon-96x96.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregar_cliente.png": "e7181ecf7bb6ddf5d90764b054e13b95be1afdc8",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregar_orden.png": "4b0448e24e1a231e9b2a5026e425c0a0ac2aeff6",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/agregarproducto.png": "31f5f38d62ac0768d7528b2ce375a7ab4e4c3171",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/almacen.png": "5f36351112ac503f5ef27cc2c40573eacfbfad10",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/cerillow.png": "1cc7e6dca1c9bcb7da29395c6782eb751e3c3bdc",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/clientes.png": "fe38a55499e28c96f9d7ac0b9f142549fcd137ed",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/explosionw.png": "530aaab686045075a8d87a3eefdfb8a51f38a4ab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/fuegow.png": "af5e61db0a9a85783fe5399dbd6ee0a1014833f2",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/icon.png": "4d89058344b72fd8c562622e5277f141cb360cab",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/loginwallpaper.png": "3e12309168f548d1775ebabaedc017d5df6abd0d",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/loginwallpapers.png": "3277e88a0358622c30af79cdc24fad01d2881b7d",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ventas.png": "f221351425dd6a36c3765880f4bb6b11fff79cb8",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ver_cliente.png": "001ccd953e5ccfdaf0edfb7c9e2405739d14910b",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/ver_ordenes.png": "73c356f71e5627a01f2a2f5596c172b4b0ad275f",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/assets/images/verinventario.png": "b740af67161a458cd1e8dd8e38a69e1ca7711c8c",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/index.html": "0dd5fcc2b91e46724c23ef03e2ca5a6f69297893",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/main-N2C2HOIS.js": "164c7f6a9a5682554155db83a73f78754c44439f",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
+    "https://github.com/CesarReyesBarrientos/Pyro-Control-Center.git/styles-K32SSY7H.css": "f8084261c20b38961b2fd55f3f1f6684175e52a9"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
