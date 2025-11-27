@@ -50,7 +50,7 @@ export interface InventarioItem {
 }
 
 export interface InventarioCreate {
-  id: number;
+  id?: number;
   nombre: string;
   categoria: string;
   stock_actual: number;

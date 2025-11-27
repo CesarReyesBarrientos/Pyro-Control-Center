@@ -37,7 +37,6 @@ export class NuevoProductoComponent implements OnInit {
   stockStep = '0.001';
 
   form = this.fb.group({
-    id: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     nombre: ['', Validators.required],
     categoria: ['', Validators.required],
     stock_actual: ['', [Validators.required, Validators.min(0)]],
@@ -125,9 +124,6 @@ export class NuevoProductoComponent implements OnInit {
       let mensajeError = 'Por favor, completa los siguientes campos:\n';
       
       // Revisar cada campo requerido
-      if (this.form.get('sku')?.errors) {
-        mensajeError += '- SKU (solo números)\n';
-      }
       if (this.form.get('nombre')?.errors) {
         mensajeError += '- Nombre del material\n';
       }
@@ -214,7 +210,6 @@ export class NuevoProductoComponent implements OnInit {
       try {
         console.log('Preparando payload del producto');
         console.log('Form values:', {
-          id: this.form.value.id,
           nombre: this.form.value.nombre,
           categoria: this.form.value.categoria,
           stock_actual: this.form.value.stock_actual,
@@ -225,7 +220,6 @@ export class NuevoProductoComponent implements OnInit {
           notas: this.form.value.notas
         });
       const payload = {
-        id: Number(this.form.value.id),
         nombre: this.form.value.nombre!,
         categoria: this.form.value.categoria!,
         stock_actual: Number(this.form.value.stock_actual),
@@ -270,7 +264,6 @@ export class NuevoProductoComponent implements OnInit {
 
   limpiarFormulario() {
     this.form.reset({
-      id: '',
       nombre: '',
       categoria: '',
       stock_actual: '',
