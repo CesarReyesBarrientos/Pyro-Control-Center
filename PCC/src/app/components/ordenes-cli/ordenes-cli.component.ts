@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService, Order, Customer } from '../../services/app.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ordenes-cli',
@@ -12,6 +14,12 @@ import { ApiService, Order, Customer } from '../../services/app.service';
 })
 export class OrdenesCliComponent implements OnInit {
   private apiService = inject(ApiService);
+  private router = inject(Router);
+  
+  goBack() {
+    this.router.navigate(['/modo-ventas']);
+  }
+  
   orders: Order[] = [];
   filteredOrders: Order[] = [];
   customers: Customer[] = [];
@@ -109,7 +117,12 @@ export class OrdenesCliComponent implements OnInit {
     if (!this.selectedOrder || !this.selectedOrder.OrderID) return;
     
     if (!this.editForm.CustomerID || !this.editForm.Invoice) {
-      alert('⚠️ Por favor completa todos los campos requeridos.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos requeridos.',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
@@ -125,13 +138,24 @@ export class OrdenesCliComponent implements OnInit {
     this.apiService.updateOrder(this.selectedOrder.OrderID, updatedOrder).subscribe({
       next: (response) => {
         console.log('✅ Orden actualizada:', response.message);
-        alert('Orden actualizada correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Orden actualizada correctamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         this.closeEditModal();
         this.loadOrders();
       },
       error: (error) => {
         console.error('❌ Error al actualizar orden:', error);
-        alert('Error al actualizar la orden. Por favor, intenta nuevamente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al actualizar la orden. Por favor, intenta nuevamente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }
@@ -186,7 +210,12 @@ export class OrdenesCliComponent implements OnInit {
       },
       error: (error) => {
         console.error('❌ Error al descargar PDF:', error);
-        alert('Error al generar el PDF. Por favor, intenta nuevamente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al generar el PDF. Por favor, intenta nuevamente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }
@@ -194,21 +223,39 @@ export class OrdenesCliComponent implements OnInit {
   deleteOrder(orderId: number | undefined, invoice: string) {
     if (!orderId) return;
 
-    const confirmacion = confirm(
-      `¿Estás seguro de dar de baja la orden "${invoice}"?`
-    );
-
-    if (!confirmacion) return;
-
-    this.apiService.deactivateOrder(orderId).subscribe({
-      next: (response) => {
-        console.log('✅ Orden dada de baja:', response.message);
-        alert('Orden dada de baja correctamente');
-        this.loadOrders();
-      },
-      error: (error) => {
-        console.error('❌ Error al dar de baja la orden:', error);
-        alert('Error al dar de baja la orden. Por favor, intenta nuevamente.');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas dar de baja la orden "${invoice}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Sí, dar de baja',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.deactivateOrder(orderId).subscribe({
+          next: (response) => {
+            console.log('✅ Orden dada de baja:', response.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'Orden dada de baja correctamente',
+              confirmButtonColor: '#10b981',
+              timer: 2000
+            });
+            this.loadOrders();
+          },
+          error: (error) => {
+            console.error('❌ Error al dar de baja la orden:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al dar de baja la orden. Por favor, intenta nuevamente.',
+              confirmButtonColor: '#ef4444'
+            });
+          }
+        });
       }
     });
   }

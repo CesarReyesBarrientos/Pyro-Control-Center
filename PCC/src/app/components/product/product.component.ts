@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { ApiService, InventarioItem, Supplier } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product',
@@ -11,6 +13,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
+  private router = inject(Router);
+  
+  goBack() {
+    this.router.navigate(['/modo-almacen']);
+  }
+  
   items = signal<InventarioItem[]>([]);
   allItems = signal<InventarioItem[]>([]);
   searchTerm = signal<string>('');
@@ -197,21 +205,39 @@ export class ProductComponent {
   }
 
   deleteProduct(id: number, nombre: string) {
-    const confirmacion = confirm(
-      `¿Estás seguro de dar de baja el producto "${nombre}"?`
-    );
-
-    if (!confirmacion) return;
-
-    this.api.deleteProduct(id).subscribe({
-      next: (response) => {
-        console.log('✅ Producto dado de baja:', response.message);
-        alert('Producto dado de baja correctamente');
-        this.loadAllProducts();
-      },
-      error: (error) => {
-        console.error('❌ Error al dar de baja el producto:', error);
-        alert('Error al dar de baja el producto. Por favor, intenta nuevamente.');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas dar de baja el producto "${nombre}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Sí, dar de baja',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.deleteProduct(id).subscribe({
+          next: (response) => {
+            console.log('✅ Producto dado de baja:', response.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'Producto dado de baja correctamente',
+              confirmButtonColor: '#10b981',
+              timer: 2000
+            });
+            this.loadAllProducts();
+          },
+          error: (error) => {
+            console.error('❌ Error al dar de baja el producto:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al dar de baja el producto. Por favor, intenta nuevamente.',
+              confirmButtonColor: '#ef4444'
+            });
+          }
+        });
       }
     });
   }
@@ -243,13 +269,24 @@ export class ProductComponent {
     this.api.updateProduct(this.editForm.id, this.editForm).subscribe({
       next: (response) => {
         console.log('✅ Producto actualizado:', response);
-        alert('Producto actualizado correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Producto actualizado correctamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         this.closeEditModal();
         this.loadAllProducts();
       },
       error: (error) => {
         console.error('❌ Error al actualizar producto:', error);
-        alert('Error al actualizar el producto. Por favor, intenta nuevamente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al actualizar el producto. Por favor, intenta nuevamente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ApiService, Customer, Order } from '../../services/app.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nueva-orden',
@@ -11,7 +13,12 @@ import { ApiService, Customer, Order } from '../../services/app.service';
 })
 export class NuevaOrdenComponent implements OnInit {
   private apiService = inject(ApiService);
+  private router = inject(Router);
   customers: Customer[] = [];
+
+  goBack() {
+    this.router.navigate(['/modo-ventas']);
+  }
   loading: boolean = false;
   invoiceError = signal<string>('');
   private validationTimeout: any = null;
@@ -142,7 +149,12 @@ export class NuevaOrdenComponent implements OnInit {
     
     // Validar campos requeridos
     if (!producto || !cliente || !factura || !fecha || !metodoPago || !estatus) {
-      alert('⚠️ Por favor completa todos los campos requeridos.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos requeridos.',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
     
@@ -152,13 +164,23 @@ export class NuevaOrdenComponent implements OnInit {
     // Validar formato de factura
     const invoicePattern = /^[A-Z]{3}-\d{4}-\d{4,6}$/;
     if (!invoicePattern.test(factura)) {
-      alert('❌ Formato de factura inválido. Use: XXX-YYYY-NNNN (ejemplo: FAC-2024-0001)');
+      Swal.fire({
+        icon: 'error',
+        title: 'Formato inválido',
+        text: 'Formato de factura inválido. Use: XXX-YYYY-NNNN (ejemplo: FAC-2024-0001)',
+        confirmButtonColor: '#ef4444'
+      });
       return;
     }
 
     // Verificar si hay error de factura duplicada
     if (this.invoiceError()) {
-      alert(this.invoiceError());
+      Swal.fire({
+        icon: 'error',
+        title: 'Factura duplicada',
+        text: this.invoiceError(),
+        confirmButtonColor: '#ef4444'
+      });
       return;
     }
     
@@ -174,14 +196,25 @@ export class NuevaOrdenComponent implements OnInit {
     // Enviar al backend
     this.apiService.createOrder(order).subscribe({
       next: (response) => {
-        alert('✅ Orden creada exitosamente!');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Orden creada exitosamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         console.log('Orden creada:', response);
         form.reset();
       },
       error: (err) => {
         console.error('Error al crear orden:', err);
         const errorMsg = err.error?.message || 'Error al crear la orden. Por favor verifica los datos.';
-        alert('❌ ' + errorMsg);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorMsg,
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }

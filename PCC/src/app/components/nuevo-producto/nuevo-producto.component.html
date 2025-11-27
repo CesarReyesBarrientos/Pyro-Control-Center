@@ -1,4 +1,5 @@
 <div class="form-card">
+  <button class="back-button" (click)="goBack()" type="button">← Regresar</button>
   <h2>Nuevo Producto</h2>
   <form [formGroup]="form" (ngSubmit)="guardar()">
     <fieldset>
