@@ -27,7 +27,7 @@ export class ModoComponent {
   logout(): void {
     this.auth.logout({ 
       logoutParams: { 
-        returnTo: 'https://cesarreyesbarrientos.github.io/Pyro-Control-Center/'
+        returnTo: 'https://cesarreyesbarrientos.github.io/Pyro-Control-Center'
       } 
     });
   }
