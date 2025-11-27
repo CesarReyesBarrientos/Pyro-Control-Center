@@ -27,7 +27,7 @@ export class ModoComponent {
   logout(): void {
     this.auth.logout({ 
       logoutParams: { 
-        returnTo: this.doc.location.origin 
+        returnTo: this.doc.location.origin + '/modo'
       } 
     });
   }
