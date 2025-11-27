@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // si ya tienes environment, úsalo; si no, pon la URL directo
-const API = 'http://localhost:3000';
+const API = 'https://bd-pyrocontrolcenter.onrender.com';
 
 export interface Proveedor {
   id: number;
