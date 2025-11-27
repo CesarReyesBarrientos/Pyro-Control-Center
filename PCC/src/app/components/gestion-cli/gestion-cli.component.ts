@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService, Customer } from '../../services/app.service';
+import Swal from 'sweetalert2';
 
 interface CustomerDisplay {
   customerId: number;
@@ -21,6 +23,11 @@ interface CustomerDisplay {
 })
 export class GestionCliComponent implements OnInit {
   private apiService = inject(ApiService);
+  private router = inject(Router);
+  
+  goBack() {
+    this.router.navigate(['/modo-clientes']);
+  }
   
   customers: CustomerDisplay[] = [];
   loading: boolean = false;
@@ -103,33 +110,58 @@ export class GestionCliComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar cliente:', err);
-        alert('Error al cargar los datos del cliente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar los datos del cliente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }
 
   saveCustomer() {
     if (!this.editForm.CustomerName || !this.editForm.Email) {
-      alert('Por favor completa los campos obligatorios (Nombre y Email).');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa los campos obligatorios (Nombre y Email).',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
     // Validar formato de email
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(this.editForm.Email)) {
-      alert('Por favor ingresa un correo electrónico válido.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Email inválido',
+        text: 'Por favor ingresa un correo electrónico válido.',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
     // Validar teléfono si se proporciona
     if (this.editForm.PhoneNumber && !/^[0-9]{10}$/.test(this.editForm.PhoneNumber)) {
-      alert('El teléfono debe contener exactamente 10 dígitos.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Teléfono inválido',
+        text: 'El teléfono debe contener exactamente 10 dígitos.',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
     // Validar código de país si se proporciona
     if (this.editForm.CountryCode && !/^[0-9]{1,4}$/.test(this.editForm.CountryCode)) {
-      alert('El código de país debe contener solo números (1-4 dígitos).');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Código inválido',
+        text: 'El código de país debe contener solo números (1-4 dígitos).',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
@@ -147,13 +179,24 @@ export class GestionCliComponent implements OnInit {
     this.apiService.updateCustomer(this.editForm.CustomerID, customerData).subscribe({
       next: (response) => {
         console.log('✅ Cliente actualizado:', response.message);
-        alert('Cliente actualizado correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Cliente actualizado correctamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         this.closeEditModal();
         this.loadCustomers();
       },
       error: (error) => {
         console.error('❌ Error al actualizar cliente:', error);
-        alert('Error al actualizar el cliente. Por favor, intenta nuevamente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al actualizar el cliente. Por favor, intenta nuevamente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }
@@ -163,21 +206,39 @@ export class GestionCliComponent implements OnInit {
   }
 
   deleteCustomer(customerId: number, nombre: string) {
-    const confirmacion = confirm(
-      `¿Estás seguro de dar de baja el cliente "${nombre}"?`
-    );
-
-    if (!confirmacion) return;
-
-    this.apiService.deactivateCustomer(customerId).subscribe({
-      next: (response) => {
-        console.log('✅ Cliente dado de baja:', response.message);
-        alert('Cliente dado de baja correctamente');
-        this.loadCustomers();
-      },
-      error: (error) => {
-        console.error('❌ Error al dar de baja el cliente:', error);
-        alert('Error al dar de baja el cliente. Por favor, intenta nuevamente.');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas dar de baja el cliente "${nombre}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Sí, dar de baja',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.deactivateCustomer(customerId).subscribe({
+          next: (response) => {
+            console.log('✅ Cliente dado de baja:', response.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'Cliente dado de baja correctamente',
+              confirmButtonColor: '#10b981',
+              timer: 2000
+            });
+            this.loadCustomers();
+          },
+          error: (error) => {
+            console.error('❌ Error al dar de baja el cliente:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al dar de baja el cliente. Por favor, intenta nuevamente.',
+              confirmButtonColor: '#ef4444'
+            });
+          }
+        });
       }
     });
   }

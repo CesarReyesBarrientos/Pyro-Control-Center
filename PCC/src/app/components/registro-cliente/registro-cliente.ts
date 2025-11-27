@@ -1,5 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService, Customer } from '../../services/app.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -8,6 +10,11 @@ import { ApiService, Customer } from '../../services/app.service';
 })
 export class RegistroCliente implements OnInit {
   private apiService = inject(ApiService);
+  private router = inject(Router);
+
+  goBack() {
+    this.router.navigate(['/modo-clientes']);
+  }
 
   ngOnInit(): void {
     const form = document.getElementById('formCliente') as HTMLFormElement;
@@ -40,7 +47,12 @@ export class RegistroCliente implements OnInit {
     const codigoPostal = formData.get('codigo_postal') as string;
     
     if (!customerName || !email || !telefono || !codigoPais || !direccion || !estado || !pais || !codigoPostal) {
-      alert('⚠️ Por favor completa todos los campos requeridos.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos requeridos.',
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
     
@@ -58,13 +70,24 @@ export class RegistroCliente implements OnInit {
 
     this.apiService.createCustomer(customer).subscribe({
       next: (response) => {
-        alert('✅ Cliente creado exitosamente!');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Cliente creado exitosamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         console.log('Cliente creado:', response);
         form.reset();
       },
       error: (err) => {
         console.error('Error al crear cliente:', err);
-        alert('❌ Error al crear cliente. Por favor verifica los datos.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al crear cliente. Por favor verifica los datos.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     });
   }

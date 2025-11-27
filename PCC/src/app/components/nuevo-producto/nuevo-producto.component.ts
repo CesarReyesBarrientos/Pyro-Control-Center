@@ -1,8 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../services/app.service';
 import { firstValueFrom } from 'rxjs';
+import Swal from 'sweetalert2';
 
 interface Proveedor {
   id: number;
@@ -23,6 +25,11 @@ interface Proveedor {
 export class NuevoProductoComponent implements OnInit {
   private fb = inject(FormBuilder);
   private api = inject(ApiService);
+  private router = inject(Router);
+
+  goBack() {
+    this.router.navigate(['/modo-almacen']);
+  }
 
   proveedores: Proveedor[] = [];
   mostrarFormProveedor = false;
@@ -162,7 +169,12 @@ export class NuevoProductoComponent implements OnInit {
         }
       }
 
-      alert(mensajeError);
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        html: mensajeError.replace(/\n/g, '<br>'),
+        confirmButtonColor: '#3b82f6'
+      });
       return;
     }
 
@@ -188,7 +200,12 @@ export class NuevoProductoComponent implements OnInit {
           }
         } catch (error) {
           console.error('Error al crear proveedor:', error);
-          alert('Error al crear el nuevo proveedor. Por favor, verifica los datos e intenta nuevamente.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al crear el nuevo proveedor. Por favor, verifica los datos e intenta nuevamente.',
+            confirmButtonColor: '#ef4444'
+          });
           return;
         }
       }
@@ -219,7 +236,13 @@ export class NuevoProductoComponent implements OnInit {
         notas: this.form.value.notas || ''
       };
       console.log('Payload a enviar:', payload);        const result = await firstValueFrom(this.api.createInventory(payload));
-        alert('¡Producto guardado exitosamente!');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Producto guardado exitosamente',
+          confirmButtonColor: '#10b981',
+          timer: 2000
+        });
         this.limpiarFormulario();
         
         // Opcional: recargar la lista de productos si está visible
@@ -227,11 +250,21 @@ export class NuevoProductoComponent implements OnInit {
         
       } catch (error) {
         console.error('Error al guardar el producto:', error);
-        alert('Error al guardar el producto. Por favor, verifica los datos e intenta nuevamente.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar el producto. Por favor, verifica los datos e intenta nuevamente.',
+          confirmButtonColor: '#ef4444'
+        });
       }
     } catch (error) {
       console.error('Error general:', error);
-      alert('Error inesperado. Por favor, intenta nuevamente o contacta al administrador.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error inesperado',
+        text: 'Error inesperado. Por favor, intenta nuevamente o contacta al administrador.',
+        confirmButtonColor: '#ef4444'
+      });
     }
   }
 
