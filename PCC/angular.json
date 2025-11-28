@@ -101,7 +101,8 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "baseHref": "/Pyro-Control-Center/",
-            "dir": "dist/pcc/browser"
+            "dir": "dist/pcc/browser",
+            "cacheDir": "C:/Temp/gh-pages-cache"
           }
         }
       }
