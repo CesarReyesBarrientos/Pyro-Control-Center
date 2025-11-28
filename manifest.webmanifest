@@ -5,8 +5,8 @@
   "theme_color": "#0f172a",
   "background_color": "#0f172a",
   "display": "standalone",
-  "scope": "/Pyro-Control-Center/",
-  "start_url": "/Pyro-Control-Center/",
+  "scope": "/",
+  "start_url": "/",
   "orientation": "portrait-primary",
   "icons": [
     {
