@@ -113,3 +113,84 @@
       .grid { grid-template-columns: 1fr; gap: 18px; }
       .grid-full { grid-column: auto; }
     }
+    
+    /* ================================ */
+/* 📱 RESPONSIVE – Mejor distribución */
+/* ================================ */
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .form-card {
+    max-width: 100%;
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  /* Más espacio entre campos */
+  label {
+    margin-top: 12px;
+    font-size: 13.5px;
+  }
+
+  input, textarea, select {
+    padding: 11px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  textarea {
+    min-height: 90px;
+  }
+
+  /* Botones responsivos */
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  .back-button {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+}
+
+/* 📱 Celulares pequeños */
+@media (max-width: 480px) {
+
+  .form-card {
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input, textarea, select {
+    padding: 10px 12px;
+  }
+
+  .actions {
+    gap: 10px;
+  }
+}

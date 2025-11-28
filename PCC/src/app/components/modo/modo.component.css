@@ -181,3 +181,45 @@ button:disabled {
     font-size: 0.9rem;
   }
 }
+/* Evitar imágenes estiradas en móviles */
+@media (max-width: 768px) {
+  .module-img {
+    height: auto !important;   /* 🔵 Corrige el estiramiento */
+    max-height: 260px;         /* 🔵 Tamaño adecuado para celulares */
+    width: 80%;                /* 🔵 Mantiene proporción */
+    object-fit: contain;       /* 🔵 La imagen no se deforma */
+  }
+}
+
+/* Celulares pequeños */
+@media (max-width: 480px) {
+  .module-img {
+    max-height: 220px;
+    width: 90%;
+  }
+}
+/* Igualar tamaño de todas las imágenes en tablets/móviles */
+@media (max-width: 992px) {
+  .module-img {
+    width: 260px;
+    height: 260px;
+    object-fit: contain; /* 🔵 No se estira, se adapta manteniendo proporción */
+  }
+}
+
+@media (max-width: 768px) {
+  .module-img {
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .module-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+  }
+}
+

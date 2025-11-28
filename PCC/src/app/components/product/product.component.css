@@ -545,3 +545,59 @@ h2 {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* =============================================== */
+/* 🔵 Wrapper responsive para tabla centrada + scroll */
+/* =============================================== */
+
+.responsive-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 0 20px 0;     /* MAS ALTURA ABAJO */
+  display: flex;
+  justify-content: center;    
+  padding-top: 10px;/* CENTRADO EN PANTALLAS GRANDES */
+}
+
+/* Tabla centrada y con ancho mínimo */
+.responsive-scroll-wrapper .styled-table {
+  min-width: 900px;           /* AJUSTA SI QUIERES */
+  margin: 0 auto;
+}
+
+/* =============================================== */
+/* 📱 Ajustes en móviles */
+/* =============================================== */
+
+/* En móviles: quitar centrado para que el SCROLL INICIE A LA IZQUIERDA */
+@media (max-width: 900px) {
+  .responsive-scroll-wrapper {
+    justify-content: flex-start;   /* EVITA QUE EMPIECE EN LA MITAD */
+    padding-bottom: 80px;          /* MÁS ALTO EL CONTENEDOR */
+  }
+
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 750px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 620px;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 580px;
+  }
+}
+
+

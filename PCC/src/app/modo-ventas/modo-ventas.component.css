@@ -79,3 +79,45 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* Centrado en tablets y móviles */
+@media (max-width: 750px) {
+
+  .image-container {
+    flex-direction: column;
+    align-items: center;   /* 🔵 Centra las imágenes */
+    justify-content: center;
+  }
+
+  .module-img {
+    margin: 0 auto;       /* 🔵 Asegura que la imagen quede centrada */
+    display: block;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;   /* 🔵 Centra la flecha de regreso */
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  .back {
+    margin: 0 auto;       /* 🔵 Centra el botón */
+  }
+}
+
+/* Para teléfonos muy pequeños */
+@media (max-width: 480px) {
+
+  .image-container {
+    align-items: center;
+  }
+
+  .module-img {
+    margin: 0 auto;
+  }
+
+  .button-container {
+    justify-content: center;
+  }
+}
