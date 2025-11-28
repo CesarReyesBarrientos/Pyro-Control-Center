@@ -67,7 +67,7 @@
   <div *ngIf="error" style="text-align: center; padding: 20px; color: #dc2626;">
     {{ error }}
   </div>
-  
+  <div class="responsive-scroll-wrapper">
   <table class="styled-table" *ngIf="!loading && !error">
     <thead>
       <tr>
@@ -132,6 +132,7 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 
 <!-- Modal de Edición -->

@@ -264,3 +264,76 @@ h2 {
     transform: translateY(0);
   }
 }
+/* =============================================== */
+/* 🔵 Wrapper responsive para tabla centrada + scroll */
+/* =============================================== */
+
+.responsive-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 0 20px 0;     /* MAS ALTURA ABAJO */
+  display: flex;
+  justify-content: center;    
+  padding-top: 100px;/* CENTRADO EN PANTALLAS GRANDES */
+}
+
+/* Tabla centrada y con ancho mínimo */
+.responsive-scroll-wrapper .styled-table {
+  min-width: 1400px;           /* AJUSTA SI QUIERES */
+  margin: 0 auto;
+}
+
+/* =============================================== */
+/* 📱 Ajustes en móviles */
+/* =============================================== */
+
+/* En móviles: quitar centrado para que el SCROLL INICIE A LA IZQUIERDA */
+@media (max-width: 900px) {
+  .responsive-scroll-wrapper {
+    justify-content: flex-start;   /* EVITA QUE EMPIECE EN LA MITAD */
+    padding-bottom: 80px;          /* MÁS ALTO EL CONTENEDOR */
+  }
+
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 750px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 620px;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-scroll-wrapper .styled-table {
+    min-width: 580px;
+  }
+}
+
+/* ===== PC: que la tabla se vea completa sin scroll ===== */
+@media (min-width: 769px) {
+  .table-container {
+    width: 100%;
+    overflow-x: visible;
+  }
+
+  /* Hacemos que el card pueda crecer y NO recorte la tabla */
+  .form-card {
+    max-width: 95vw !important;   /* Que use casi todo el ancho de pantalla */
+    overflow: visible !important;
+  }
+
+  table {
+    width: 100%;
+    table-layout: auto;
+  }
+}
+

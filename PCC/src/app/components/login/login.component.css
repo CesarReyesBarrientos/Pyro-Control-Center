@@ -143,8 +143,8 @@ button:hover {
 /* Celulares pequeños (≤ 480px) */
 @media (max-width: 480px) {
   body {
-    align-items: flex-start;
-    padding-top: 60px;
+    padding: 20px; 
+    align-items: center;   /* mantener centrado */
   }
 
   .login-container {
@@ -152,6 +152,7 @@ button:hover {
     padding: 18px;
     border-radius: 10px;
   }
+
 
   .avatar-img {
     width: 130px;
